@@ -9,7 +9,11 @@ updates:
         patterns:
           - "astro"
           - "@astrojs/*"
-          - "typescript"
+    ignore:
+      # @astrojs/check@0.9.10 peer-depends on typescript ^5.0.0 || ^6.0.0.
+      # Remove once @astrojs/check supports TypeScript 7.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
