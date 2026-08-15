@@ -2,7 +2,7 @@
 title: "Monthly Membership Meeting"
 recurring: "monthly-second-tuesday"
 recurringStartAfter: 2026-07-15
-time: "4:00 PM"
+time: "4:30 PM"
 location: "Miami Springs Historical Society, 501 East Drive"
 ---
 
