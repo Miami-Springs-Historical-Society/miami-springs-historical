@@ -184,11 +184,22 @@ const t = useTranslations(Astro.currentLocale);
   }
 
   @media (max-width: 640px) {
+    /* Wrapped side by side, button width tracks label length — which let the
+       longest label ("Descubre nuestra historia") dominate the two actions
+       that matter more. Stacked at equal width, emphasis comes from color. */
+    .hero-cta {
+      flex-direction: column;
+      align-items: center;
+    }
+
     .btn-primary,
     .btn-secondary,
     .btn-donate {
+      width: 100%;
+      max-width: 22rem;
       padding-left: 1rem;
       padding-right: 1rem;
+      text-align: center;
     }
   }
 

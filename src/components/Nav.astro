@@ -118,14 +118,18 @@ const base = isEs ? '/es' : '';
   .nav-links {
     list-style: none;
     display: flex;
-    gap: 2rem;
+    /* The nav is capped at --max-width, so the row must fit ~1036px at any
+       screen size. Spanish labels run far longer than English, so the gap and
+       tracking are sized for the Spanish menu, not the English one. */
+    gap: 1.15rem;
   }
 
   .nav-links a {
     color: var(--color-bg);
     text-decoration: none;
+    white-space: nowrap;
     font-size: 0.8125rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.07em;
     text-transform: uppercase;
     font-family: var(--font-body);
     transition: color 0.2s;
@@ -140,6 +144,10 @@ const base = isEs ? '/es' : '';
     color: var(--color-white) !important;
     padding: 0.3rem 0.875rem;
     letter-spacing: 0.08em;
+    /* WCAG 1.4.11: the fills alone sit at 2.2-2.4:1 against the nav bar, so the
+       pill boundary carries the 3:1 contrast instead (tan clears 3.6:1 against
+       both fills and 8.5:1 against the bar). */
+    border: 1px solid var(--color-secondary);
     transition: background-color 0.2s !important;
   }
 
@@ -218,6 +226,15 @@ const base = isEs ? '/es' : '';
       padding: 0.75rem 1.5rem;
       font-size: 0.875rem;
       letter-spacing: 0.08em;
+    }
+
+    /* Stacked, the two pills would otherwise sit flush and read as one
+       two-tone slab. Equal insets give them matching widths and 0.5rem of
+       separation from each other and from the plain links. */
+    .nav-join a,
+    .nav-donate a {
+      margin: 0.25rem 1.5rem;
+      text-align: center;
     }
   }
 </style>
