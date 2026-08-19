@@ -144,20 +144,33 @@ miami-springs-historical/
 ├── wrangler.jsonc           # Cloudflare Workers configuration
 ├── astro.config.mjs         # Astro config (i18n, sitemap, build-time CSP script hashes)
 ├── .github/
+│   ├── dependabot.yml       # Weekly npm + GitHub Actions update PRs
 │   └── workflows/
 │       ├── ci.yml           # astro check + build on PRs to main
 │       ├── deploy.yml       # Build + deploy to Cloudflare on push to main
-│       └── audit.yml        # Monthly npm audit; alerts on new advisories
+│       ├── audit.yml        # Monthly npm audit; alerts on new advisories
+│       └── dependabot-auto-merge.yml  # Auto-merges non-major Dependabot PRs
 ├── CLAUDE.md                # Conventions for AI-assisted edits
 ├── STYLE_GUIDE.md           # Design system — colors, type, spacing, components
 └── package.json
 ```
 
-## Security headers
+## Security
+
+### Headers
 
 `public/_headers` carries the site's CSP and related headers. The `script-src` hashes are **generated at build time** by the `csp-script-hashes` integration in `astro.config.mjs`, which scans the built HTML for inline scripts and rewrites the header in `dist/`. Don't hand-edit the hashes in the source `_headers` file — add or change inline scripts and rebuild instead.
 
-`.github/workflows/audit.yml` runs `npm audit` monthly and fails only when an advisory appears that isn't in its reviewed `BASELINE` set.
+### Dependency updates
+
+Dependencies update themselves — **check for an open Dependabot PR before updating anything by hand.**
+
+- `.github/dependabot.yml` opens weekly PRs for npm packages and GitHub Actions, with `astro` and `@astrojs/*` grouped into a single PR
+- `.github/workflows/dependabot-auto-merge.yml` auto-merges any Dependabot PR that isn't a semver-major. Major bumps wait for a human. This depends on repo settings — **Allow auto-merge** must be on, the merge method the workflow requests must be enabled, and `main` needs branch protection requiring the CI check, or auto-merge lands the PR without waiting for CI.
+- TypeScript majors are deliberately held back: `@astrojs/check` peer-depends on `typescript ^5 || ^6`, so `npm outdated` flagging TypeScript is expected rather than drift. Remove the `ignore` entry once `@astrojs/check` supports TS 7.
+- `.github/workflows/audit.yml` runs `npm audit` monthly as a backstop and fails only when an advisory appears that isn't in its reviewed `BASELINE` set
+
+If you do need to patch manually, plain `npm audit fix` has always been enough — avoid `--force`, and verify with `npm run build` and `npx astro check`.
 
 ## Accessibility
 
