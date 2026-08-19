@@ -139,6 +139,19 @@ const base = isEs ? '/es' : '';
     color: var(--color-white);
   }
 
+  /* The colour shift alone is #faf6f0 -> #fff, a 1.08:1 change nobody can see,
+     so hover also draws an underline. Reserved as transparent at rest so the
+     row never shifts. Excludes the pills, which have their own border and
+     signal hover by darkening their fill. Focus is already covered by the
+     white outline in Layout.astro. */
+  .nav-links li:not(.nav-join):not(.nav-donate) a {
+    border-bottom: 1px solid transparent;
+  }
+
+  .nav-links li:not(.nav-join):not(.nav-donate) a:hover {
+    border-bottom-color: currentColor;
+  }
+
   .nav-join a,
   .nav-donate a {
     color: var(--color-white) !important;

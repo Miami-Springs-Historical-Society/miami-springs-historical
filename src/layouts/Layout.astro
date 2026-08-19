@@ -127,7 +127,9 @@ const esUrl = site + esPath;
     --color-eyebrow: #a8e6a9;
     --color-facebook: #1877f2;
     --color-facebook-dark: #0f5cc9;
-    --color-btn-ghost-border: rgba(255, 255, 255, 0.55);
+    /* 0.7, not 0.55: over the hero overlay a 0.55 border falls to 2.99:1
+       against a bright photo, just under the 3:1 WCAG 1.4.11 wants. */
+    --color-btn-ghost-border: rgba(255, 255, 255, 0.7);
     --color-btn-ghost-hover: rgba(255, 255, 255, 0.08);
     --color-footer-link-border: rgba(250, 246, 240, 0.5);
     --color-footer-link-border-hover: rgba(250, 246, 240, 0.7);

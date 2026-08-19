@@ -31,7 +31,7 @@ const fbLocale = Astro.currentLocale === 'es' ? 'es_LA' : 'en_US';
       <div class="fb-side">
         <h3>Miami Springs Historical Society</h3>
         <p>{t('connect.body')}</p>
-        <a href={fbUrl} target="_blank" rel="noopener noreferrer" class="fb-link">
+        <a href={fbUrl} target="_blank" rel="noopener noreferrer" class="fb-link" aria-label={`${t('connect.link').replace(/\s*→$/, '')} ${t('layout.opens_new_tab')}`}>
           {t('connect.link')}
         </a>
       </div>
