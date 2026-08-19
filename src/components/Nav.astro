@@ -213,7 +213,11 @@ const base = isEs ? '/es' : '';
     background-color: var(--color-white);
   }
 
-  @media (max-width: 560px) {
+  /* 1100px, not 560px: the horizontal row needs ~964px of viewport in English
+     and ~1100px in Spanish, which fills the 1036px content box with no slack.
+     Collapsing at 560px left everything from 561px up overflowing into the
+     logo. Sized for Spanish, since both locales share this stylesheet. */
+  @media (max-width: 1100px) {
     .hamburger {
       display: flex;
     }
