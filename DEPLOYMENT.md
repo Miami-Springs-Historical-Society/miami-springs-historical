@@ -1,16 +1,20 @@
 # Deployment Guide
 
 This site is an [Astro](https://astro.build) static site deployed to **Cloudflare Workers**
-via GitHub Actions. Every push to the `main` branch triggers an automatic build and deploy —
-no manual steps required after initial setup.
+by **Cloudflare Workers Builds**, which builds and deploys straight from git. Every push to the
+`main` branch triggers an automatic build and deploy — no manual steps required after initial
+setup.
 
 ---
 
 ## How it works
 
 ```
-Push to main → GitHub Actions builds → wrangler deploys to Cloudflare → cache purged → site is live
+Push to main → Cloudflare Workers Builds builds & deploys → site is live
 ```
+
+Deployment is configured in the Cloudflare dashboard, not in this repo. GitHub Actions runs the
+pull request checks and nothing else — it does not deploy.
 
 The build runs `npm run build`, producing a `dist/` folder of static assets. The Cloudflare
 Worker (`worker.ts`) serves those assets at the edge and handles automatic language detection
@@ -37,21 +41,59 @@ Runs on every pull request to `main`. Performs:
 
 Fails fast if the build is broken before anything reaches `main`.
 
-### Deploy — `.github/workflows/deploy.yml`
-Runs on every push to `main`. Performs:
-1. Production build
-2. `npx wrangler@4.100.0 deploy` — pushes static assets + Worker to Cloudflare (version pinned so the deploy step never pulls an unverified wrangler release while the Cloudflare API token is in scope)
-3. Full cache purge via Cloudflare API
+This check is required by branch protection on `main`, so nothing broken can be merged — and
+since Cloudflare deploys whatever lands on `main`, merge protection *is* the deploy gate.
+
+### Branch protection on `main`
+
+| Rule | Setting |
+|---|---|
+| Pull request required | Yes — no direct pushes |
+| Approving reviews required | **0** — you can merge your own PR |
+| Required check | `Type check & build` |
+| Conversations must be resolved | Yes |
+| Force pushes / branch deletion | Blocked |
+| Applies to admins | No — admins retain a break-glass path |
+
+Approvals are deliberately set to 0. Requiring even one would lock out a solo maintainer,
+since GitHub does not let you approve your own pull request, and it would stall Dependabot
+auto-merge permanently — a bot cannot obtain an approval.
+
+To make the rules binding on admins too, set `enforce_admins` to true. That removes the
+emergency path for pushing a fix directly, so it is a deliberate trade rather than a
+straightforward upgrade.
+
+### Purge cache — `.github/workflows/purge-cache.yml`
+**On demand only.** Run it from the Actions tab ("Run workflow"), or `gh workflow run
+purge-cache.yml`. It is not part of deploying and nothing triggers it automatically.
+
+You should rarely need it. Assets are served with `Cache-Control: public, max-age=0,
+must-revalidate` and a content-derived ETag, so replacing a file — even under the same
+filename — makes caches revalidate and fetch the new bytes. It exists for the case where that
+stops being true: a Cache Rule or Page Rule added in the Cloudflare dashboard can override
+origin cache headers, and nothing in this repo would reveal it.
+
+### Deployment used to run here
+Until 2026-08-19 a `deploy.yml` workflow also built the site and ran `wrangler deploy` on every
+push. That duplicated what Cloudflare Workers Builds was already doing — two pipelines building
+the same commit, potentially with different Node and wrangler versions, both publishing to the
+same Worker. It was removed. If you ever need to go back to deploying from GitHub, restore it
+from history and disable the git integration in the Cloudflare dashboard, so only one pipeline
+deploys.
 
 ### Required GitHub secrets
 
 | Secret | Purpose |
 |---|---|
-| `CLOUDFLARE_API_TOKEN` | Authenticates wrangler and cache purge API calls |
-| `CLOUDFLARE_ACCOUNT_ID` | Identifies the Cloudflare account for wrangler |
+| `CLOUDFLARE_API_TOKEN` | Authenticates the cache purge API call |
 | `CLOUDFLARE_ZONE_ID` | Identifies the DNS zone for cache purge |
 
 Set these in the repo under **Settings → Secrets and variables → Actions**.
+
+> **Outstanding:** the token predates this change and still carries the deploy permissions
+> `wrangler` needed. Only `Zone → Cache Purge` is used now, so it should be replaced with a
+> token scoped to that alone and the old one revoked. `CLOUDFLARE_ACCOUNT_ID` is no longer
+> used by anything and can be deleted.
 
 ---
 
@@ -68,7 +110,7 @@ Go to https://dash.cloudflare.com and log in.
 1. In the left sidebar, click **Workers & Pages**
 2. Click **Create** → **Workers** → **Connect to Git**
 3. Authorize Cloudflare to access your GitHub account if prompted
-4. Select the repository: `messinadm/miami-springs-historical`
+4. Select the repository: `Miami-Springs-Historical-Society/miami-springs-historical`
 5. Click **Begin setup**
 
 > **Note:** Choose **Workers**, not Pages. The repo uses `wrangler.jsonc` to configure
@@ -116,15 +158,31 @@ To configure a custom domain after the initial deploy:
 
 ## Caching
 
-The `public/_headers` file disables HTML caching at the Cloudflare edge:
+The `public/_headers` file disables caching for HTML:
 
 ```
-/*
-  Cache-Control: no-store
+/*.html
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/
+  Cache-Control: no-cache, no-store, must-revalidate
 ```
 
-This ensures content changes (events, board members) appear immediately after deploy without
-requiring a manual cache purge. The deploy workflow also does a full cache purge as a belt-and-suspenders measure.
+So content changes (events, board members) appear immediately after deploy.
+
+Everything else is safe without a purge too, for two different reasons. CSS and JS ship under
+content-hashed filenames (`_astro/Board.Dn6KGzMU.css`), so each build produces new URLs. Images
+and other files in `public/` keep fixed names, but Cloudflare serves them with
+`Cache-Control: public, max-age=0, must-revalidate` and a content-derived ETag — caches must
+revalidate before reuse, and replacing a file changes its ETag, so the new bytes are fetched.
+
+That is why purging is a manual button rather than a deploy step. Verify the behavior any time
+with:
+
+```bash
+curl -sI https://miamispringshistoricalsociety.com/curtiss-mansion-entrance.jpg \
+  | grep -i 'cache-control\|etag'
+```
 
 ---
 
@@ -135,17 +193,29 @@ All content is stored as files in this repository:
 | Content | Location |
 |---|---|
 | Site settings (email, phone, Facebook URL) | `src/data/general.json` |
-| Museum hours | `src/i18n/en.json` → `footer.hours` |
+| Museum hours | Three places: `src/data/general.json`, plus `footer.hours` in `src/i18n/en.json` and `es.json` |
 | Events | `src/content/events/` — one `.md` file per event |
 | Board members | `src/content/board/` — one `.md file` per member |
 | Resources page links | `src/data/resources.ts` |
 | Images | `public/` |
 
-To update content:
-1. Edit the relevant file
-2. `git add` and `git commit`
-3. `git push origin main`
-4. Cloudflare automatically rebuilds and deploys (~1 minute)
+`main` is protected — it takes pull requests, not direct pushes.
+
+**From the command line:**
+1. `git checkout -b your-change` — branch first
+2. Edit the relevant file, then `git add` and `git commit`
+3. `git push -u origin your-change`
+4. `gh pr create` (or use the link git prints), wait for the check, then merge
+5. Cloudflare rebuilds and deploys (~1 minute)
+
+**From github.com**, which is easier for a one-line content edit:
+1. Navigate to the file and click the pencil icon
+2. Make the edit, then choose **Create a new branch for this commit and start a pull request**
+3. Merge the pull request once the check goes green
+4. Cloudflare rebuilds and deploys (~1 minute)
+
+No approving review is required — you can merge your own pull request. The check just has to
+pass first, which is what keeps a broken build from reaching the live site.
 
 ---
 
@@ -168,8 +238,8 @@ miami-springs-historical/
 │   └── _headers             # Edge caching headers
 ├── src/
 │   ├── components/          # Astro components (Nav, Hero, About, Events, FacebookFeed, Board, Footer)
+│   ├── content.config.ts    # Zod schema for content collections
 │   ├── content/
-│   │   ├── config.ts        # Zod schema for content collections
 │   │   ├── board/           # Board member markdown files
 │   │   └── events/          # Event markdown files
 │   ├── data/
@@ -204,6 +274,7 @@ miami-springs-historical/
 |---|---|
 | [Astro 5](https://astro.build) | Static site framework |
 | [Cloudflare Workers](https://workers.cloudflare.com) | Hosting and CDN |
-| [GitHub Actions](https://github.com/features/actions) | CI and automated deployment |
+| [GitHub Actions](https://github.com/features/actions) | Pull request checks, dependency audit, manual cache purge |
+| [Cloudflare Workers Builds](https://developers.cloudflare.com/workers/ci-cd/builds/) | Builds and deploys every push to `main` |
 | Markdown | Content authoring (events, board members) |
 | TypeScript + Zod | Schema validation for content collections |
