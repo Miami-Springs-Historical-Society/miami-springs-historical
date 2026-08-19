@@ -95,7 +95,7 @@ To update translations, edit `src/i18n/es.json`. Every key in `en.json` should h
 | `/` | `/es` | Home — hero, about, history slideshow, events, connect, board, footer |
 | `/museum` | `/es/museum` | Museum exhibits, visit info, satellite locations |
 | `/resources` | `/es/resources` | Curated external references for Miami Springs history research |
-| `/welcome` | `/es/welcome` | Membership landing page (`noindex`) |
+| `/welcome` | `/es/welcome` | Post-signup membership confirmation, where Square returns new members (`noindex`) |
 | `/thank-you` | `/es/thank-you` | Post-donation thank-you page (`noindex`) |
 | `/rss.xml` | — | RSS feed of upcoming events |
 | `/*` (no match) | `/es/*` | Custom 404 page with 1920s land boom theme |
@@ -133,7 +133,7 @@ miami-springs-historical/
 │       ├── index.astro      # Home page (English)
 │       ├── museum.astro     # Museum page (English)
 │       ├── resources.astro  # Resources & references page (English)
-│       ├── welcome.astro    # Membership page (English)
+│       ├── welcome.astro    # Membership confirmation (English)
 │       ├── thank-you.astro  # Donation thank-you page (English)
 │       ├── 404.astro        # Custom 404 page (English)
 │       ├── rss.xml.ts       # RSS feed generator

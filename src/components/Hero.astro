@@ -21,22 +21,22 @@ const t = useTranslations(Astro.currentLocale);
     <h1 id="hero-heading" class="hero-title">{t('hero.title_line1')}<br />{t('hero.title_line2')}</h1>
     <p class="hero-tagline">{t('hero.tagline')}</p>
     <div class="hero-cta">
-      <a href="#about" class="btn-primary">{t('hero.cta_primary')}</a>
       <a
-        href={generalSettings.facebook_url}
+        href={generalSettings.membership_url}
         target="_blank"
         rel="noopener noreferrer"
-        class="btn-secondary"
-        aria-label={`${t('hero.cta_secondary')} (opens in new tab)`}
+        class="btn-primary"
+        aria-label={`${t('hero.cta_join')} ${t('layout.opens_new_tab')}`}
       >
-        {t('hero.cta_secondary')}
+        {t('hero.cta_join')}
       </a>
+      <a href="#about" class="btn-secondary">{t('hero.cta_primary')}</a>
       <a
         href={generalSettings.donate_url}
         target="_blank"
         rel="noopener noreferrer"
         class="btn-donate"
-        aria-label={`${t('hero.cta_donate')} (opens in new tab)`}
+        aria-label={`${t('hero.cta_donate')} ${t('layout.opens_new_tab')}`}
       >
         {t('hero.cta_donate')}
       </a>

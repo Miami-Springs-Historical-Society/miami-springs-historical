@@ -31,8 +31,11 @@ const base = isEs ? '/es' : '';
       <li><a href={`${base}/#events`}>{t('nav.events')}</a></li>
       <li><a href={`${base}/#connect`}>{t('nav.connect')}</a></li>
       <li><a href={`${base}/#board`}>{t('nav.board')}</a></li>
+      <li class="nav-join">
+        <a href={generalSettings.membership_url} target="_blank" rel="noopener noreferrer" aria-label={`${t('nav.join')} ${t('layout.opens_new_tab')}`}>{t('nav.join')}</a>
+      </li>
       <li class="nav-donate">
-        <a href={generalSettings.donate_url} target="_blank" rel="noopener noreferrer" aria-label={`${t('nav.donate')} (opens in new tab)`}>{t('nav.donate')}</a>
+        <a href={generalSettings.donate_url} target="_blank" rel="noopener noreferrer" aria-label={`${t('nav.donate')} ${t('layout.opens_new_tab')}`}>{t('nav.donate')}</a>
       </li>
       <li class="nav-lang">
         <a href={isEs ? '/' : '/es'} id="lang-switch">{t('nav.lang_switch')}</a>
@@ -132,12 +135,25 @@ const base = isEs ? '/es' : '';
     color: var(--color-white);
   }
 
+  .nav-join a,
   .nav-donate a {
-    background-color: var(--color-accent);
     color: var(--color-white) !important;
     padding: 0.3rem 0.875rem;
     letter-spacing: 0.08em;
     transition: background-color 0.2s !important;
+  }
+
+  .nav-join a {
+    background-color: var(--color-primary);
+  }
+
+  .nav-join a:hover {
+    background-color: var(--color-primary-dark) !important;
+    color: var(--color-white) !important;
+  }
+
+  .nav-donate a {
+    background-color: var(--color-accent);
   }
 
   .nav-donate a:hover {
