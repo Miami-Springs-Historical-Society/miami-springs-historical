@@ -1,6 +1,7 @@
 {
   "layout": {
-    "skip_to_content": "Skip to main content"
+    "skip_to_content": "Skip to main content",
+    "opens_new_tab": "(opens in new tab)"
   },
   "nav": {
     "about": "About",
@@ -9,6 +10,7 @@
     "events": "Events",
     "connect": "Connect",
     "board": "Board",
+    "join": "Join",
     "donate": "Donate",
     "lang_switch": "Español",
     "open_menu": "Open menu",
@@ -22,9 +24,9 @@
     "title_line1": "Miami Springs",
     "title_line2": "Historical Society",
     "tagline": "Celebrating Our Centennial — 100 Years of Miami Springs",
+    "cta_join": "Join Now",
     "cta_primary": "Discover Our Story",
-    "cta_secondary": "Follow on Facebook",
-    "cta_donate": "Donate Now"
+    "cta_donate": "Donate"
   },
   "about": {
     "heading": "About the Society",
