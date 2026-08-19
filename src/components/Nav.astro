@@ -229,12 +229,11 @@ const base = isEs ? '/es' : '';
     }
 
     /* Stacked, the two pills would otherwise sit flush and read as one
-       two-tone slab. Equal insets give them matching widths and 0.5rem of
-       separation from each other and from the plain links. */
+       two-tone slab. Separate them vertically only — a horizontal inset would
+       push their labels off the left edge the other menu items share. */
     .nav-join a,
     .nav-donate a {
-      margin: 0.25rem 1.5rem;
-      text-align: center;
+      margin: 0.25rem 0;
     }
   }
 </style>
