@@ -90,10 +90,11 @@ deploys.
 
 Set these in the repo under **Settings → Secrets and variables → Actions**.
 
-> **Outstanding:** the token predates this change and still carries the deploy permissions
-> `wrangler` needed. Only `Zone → Cache Purge` is used now, so it should be replaced with a
-> token scoped to that alone and the old one revoked. `CLOUDFLARE_ACCOUNT_ID` is no longer
-> used by anything and can be deleted.
+`CLOUDFLARE_API_TOKEN` needs the `Zone → Cache Purge` permission on this zone. Keep it scoped
+to only what the workflow uses.
+
+If a purge run fails, the workflow prints Cloudflare's HTTP status and response body, which
+identifies the cause.
 
 ---
 
