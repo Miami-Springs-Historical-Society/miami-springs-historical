@@ -112,17 +112,20 @@ On **dark panel backgrounds**, use `--color-eyebrow` for the divider instead of 
 
 ### Buttons
 
+Shared by every variant: `--font-body`, `0.8125rem`, uppercase, `letter-spacing: 0.1em`, `2px` border, `white-space: nowrap`.
+
 **Primary:**
 - Background: `--color-primary` / hover: `--color-primary-dark`
 - Text: `--color-white`
 - Border: `2px solid --color-primary`
-- Padding: `0.75rem 2rem`
-- Font: `--font-body`, `0.8125rem`, uppercase, `letter-spacing: 0.1em`
+- Padding: `0.75rem 1.5rem`
 
 **Ghost (on dark/photo backgrounds):**
 - Background: transparent / hover: `--color-btn-ghost-hover`
 - Text: `--color-white`
 - Border: `2px solid --color-btn-ghost-border`
+- Padding: `0.75rem 2rem`
+- The border token's `0.7` alpha is load-bearing — see Accessibility below before lowering it.
 
 **Link-style:**
 - Text: `--color-primary` / hover: `--color-accent`
@@ -133,9 +136,29 @@ On **dark panel backgrounds**, use `--color-eyebrow` for the divider instead of 
 - Background: `--color-accent` / hover: `--color-accent-dark`
 - Text: `--color-white`
 - Border: `2px solid --color-accent`
-- Padding: `0.75rem 1.5rem`
-- Font: `--font-body`, `0.8125rem`, uppercase, `letter-spacing: 0.1em`
+- Padding: `0.75rem 2rem` in the hero, `0.5rem 1.5rem` in the footer
 - Use exclusively for donation/financial support CTAs to visually distinguish them from navigation actions. Do not use for general page navigation.
+
+**Nav pills (JOIN / DONATE in the menu):**
+- Padding: `0.3rem 0.875rem`, `letter-spacing: 0.08em`
+- Border: `1px solid --color-secondary` — **required**, not decorative. Both fills sit at roughly 2.2–2.4:1 against the nav bar, so the border is what carries the 3:1 boundary contrast, and it holds on hover where the fills darken further.
+- JOIN uses `--color-primary`, DONATE uses `--color-accent`. Membership signup is not a donation, so it does not take the green.
+
+### Button groups
+
+- Side by side above `640px`, `1rem` gap, centered
+- Below `640px`, stack in a column at equal width, `max-width: 22rem`, centered
+
+Equal width matters on the stack: left to wrap naturally, a button's width tracks its label length, so the longest label wins the most visual weight regardless of importance — and Spanish labels run considerably longer than English. Stacked at one width, emphasis comes from color, which is the part you control.
+
+### Hover states
+
+Every interactive element needs a hover change someone can actually perceive.
+
+- If the only change is color and the two states are under roughly `1.5:1` apart, add a second cue. A nav link going `--color-bg` → `--color-white` is a 1.08:1 change, i.e. nothing.
+- The second cue should be an underline, applied as a `border-bottom` that is present but `transparent` at rest so nothing reflows when it appears.
+- Never signal hover with italic, bold, or a size change — they alter text metrics, so the element shifts under the cursor.
+- Solid-fill buttons are the exception: darkening a large area of fill reads on its own and needs no underline.
 
 ---
 
@@ -149,6 +172,21 @@ This site targets **WCAG 2.1 AA**.
 - Focus styles use the global rule in `Layout.astro` — do not override `:focus-visible` without maintaining visibility
 - Do not go below `0.75rem` font size
 - The skip link (`<a class="skip-link">`) in `Layout.astro` must remain as-is
+- Any link that opens a new tab gets `aria-label={`${label} ${t('layout.opens_new_tab')}`}` — never hardcode the phrase, it has to translate
+- Mark the current page with `aria-current="page"` wherever a page links to itself
+
+### Contrast
+
+Two different thresholds, and it's easy to meet one while failing the other:
+
+- **Text — 4.5:1** against its background (WCAG 1.4.3 AA)
+- **Boundaries and non-text — 3:1** against *adjacent* colors (WCAG 1.4.11). This covers what makes a control identifiable as a control.
+
+A filled button can pass the first and fail the second. Both nav pills do exactly that: white on them is 7.1:1 and 7.55:1, comfortably legible, while the fills are only 2.2–2.4:1 against the nav bar. Hence the required `--color-secondary` border.
+
+When fixing a boundary, prefer adding a border over lightening the fill. Fills usually darken on hover, which re-breaks a fix made in the fill; a border color that doesn't change holds in every state.
+
+Check the worst case, not the typical one. `--color-btn-ghost-border` sits over a photograph, so the relevant background is the *brightest* area the photo can present, not its average. At `0.55` alpha that measured 2.99:1 and failed; `0.7` gives 3.80:1.
 
 ---
 

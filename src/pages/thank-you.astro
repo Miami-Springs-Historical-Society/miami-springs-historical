@@ -71,7 +71,7 @@ const t = useTranslations(Astro.currentLocale);
           <a href="/museum" class="next-card">
             <span class="next-label">{t('thank_you.museum_cta')}</span>
           </a>
-          <a href={generalSettings.facebook_url} target="_blank" rel="noopener noreferrer" class="next-card next-card--fb">
+          <a href={generalSettings.facebook_url} target="_blank" rel="noopener noreferrer" class="next-card next-card--fb" aria-label={`${t('thank_you.facebook_cta').replace(/\s*→$/, '')} ${t('layout.opens_new_tab')}`}>
             <span class="next-label">{t('thank_you.facebook_cta')}</span>
           </a>
           <a href="/" class="next-card next-card--home">

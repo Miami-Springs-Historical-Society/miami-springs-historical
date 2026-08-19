@@ -3,6 +3,7 @@ import generalSettings from '../data/general.json';
 import { useTranslations } from '../i18n/utils';
 const t = useTranslations(Astro.currentLocale);
 const base = Astro.currentLocale === 'es' ? '/es' : '';
+const isResources = Astro.url.pathname.replace(/\/$/, '').endsWith('/resources');
 ---
 
 <footer class="footer">
@@ -30,12 +31,23 @@ const base = Astro.currentLocale === 'es' ? '/es' : '';
         </svg>
       </a>
     </div>
-    <a href={generalSettings.donate_url} target="_blank" rel="noopener noreferrer" class="footer-donate">{t('footer.donate')}</a>
+    <a
+      href={generalSettings.donate_url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="footer-donate"
+      aria-label={`${t('footer.donate')} ${t('layout.opens_new_tab')}`}
+    >{t('footer.donate')}</a>
     <p class="footer-attribution">{t('footer.attribution')}</p>
     <p class="footer-links">
-      <a href="https://www.miamisprings-fl.gov/" target="_blank" rel="noopener noreferrer">{t('footer.link_city')}</a>
+      <a
+        href="https://www.miamisprings-fl.gov/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${t('footer.link_city')} ${t('layout.opens_new_tab')}`}
+      >{t('footer.link_city')}</a>
       <span aria-hidden="true">·</span>
-      <a href={`${base}/resources`}>{t('footer.link_resources')}</a>
+      <a href={`${base}/resources`} aria-current={isResources ? 'page' : undefined}>{t('footer.link_resources')}</a>
     </p>
     <p class="footer-copy">&copy; {new Date().getFullYear()} Miami Springs Historical Society</p>
   </div>

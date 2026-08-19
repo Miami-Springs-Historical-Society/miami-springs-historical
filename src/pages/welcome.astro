@@ -34,7 +34,7 @@ const t = useTranslations(Astro.currentLocale);
 
       <nav class="actions" aria-label="Next steps">
         <a href="/museum" class="btn-ghost">{t('membership.museum_cta')}</a>
-        <a href={generalSettings.facebook_url} target="_blank" rel="noopener noreferrer" class="btn-ghost">{t('membership.facebook_cta')}</a>
+        <a href={generalSettings.facebook_url} target="_blank" rel="noopener noreferrer" class="btn-ghost" aria-label={`${t('membership.facebook_cta')} ${t('layout.opens_new_tab')}`}>{t('membership.facebook_cta')}</a>
         <a href="/" class="btn-ghost">{t('membership.home_cta')}</a>
       </nav>
     </div>

@@ -127,7 +127,7 @@ const t = useTranslations(Astro.currentLocale);
           <h2 id="gift-heading" class="section-heading">{t('museum.gift_heading')}</h2>
           <div class="divider"></div>
           <p>{t('museum.gift_body')}</p>
-          <a href={generalSettings.donate_url} target="_blank" rel="noopener noreferrer" class="donate-cta">{t('museum.gift_donate_cta')}</a>
+          <a href={generalSettings.donate_url} target="_blank" rel="noopener noreferrer" class="donate-cta" aria-label={`${t('museum.gift_donate_cta').replace(/\s*→$/, '')} ${t('layout.opens_new_tab')}`}>{t('museum.gift_donate_cta')}</a>
         </section>
 
         <section class="donate-section" aria-labelledby="donate-heading">
