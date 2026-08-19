@@ -44,6 +44,25 @@ Fails fast if the build is broken before anything reaches `main`.
 This check is required by branch protection on `main`, so nothing broken can be merged — and
 since Cloudflare deploys whatever lands on `main`, merge protection *is* the deploy gate.
 
+### Branch protection on `main`
+
+| Rule | Setting |
+|---|---|
+| Pull request required | Yes — no direct pushes |
+| Approving reviews required | **0** — you can merge your own PR |
+| Required check | `Type check & build` |
+| Conversations must be resolved | Yes |
+| Force pushes / branch deletion | Blocked |
+| Applies to admins | No — admins retain a break-glass path |
+
+Approvals are deliberately set to 0. Requiring even one would lock out a solo maintainer,
+since GitHub does not let you approve your own pull request, and it would stall Dependabot
+auto-merge permanently — a bot cannot obtain an approval.
+
+To make the rules binding on admins too, set `enforce_admins` to true. That removes the
+emergency path for pushing a fix directly, so it is a deliberate trade rather than a
+straightforward upgrade.
+
 ### Purge cache — `.github/workflows/purge-cache.yml`
 **On demand only.** Run it from the Actions tab ("Run workflow"), or `gh workflow run
 purge-cache.yml`. It is not part of deploying and nothing triggers it automatically.
@@ -180,11 +199,23 @@ All content is stored as files in this repository:
 | Resources page links | `src/data/resources.ts` |
 | Images | `public/` |
 
-To update content:
-1. Edit the relevant file
-2. `git add` and `git commit`
-3. `git push origin main`
-4. Cloudflare automatically rebuilds and deploys (~1 minute)
+`main` is protected — it takes pull requests, not direct pushes.
+
+**From the command line:**
+1. `git checkout -b your-change` — branch first
+2. Edit the relevant file, then `git add` and `git commit`
+3. `git push -u origin your-change`
+4. `gh pr create` (or use the link git prints), wait for the check, then merge
+5. Cloudflare rebuilds and deploys (~1 minute)
+
+**From github.com**, which is easier for a one-line content edit:
+1. Navigate to the file and click the pencil icon
+2. Make the edit, then choose **Create a new branch for this commit and start a pull request**
+3. Merge the pull request once the check goes green
+4. Cloudflare rebuilds and deploys (~1 minute)
+
+No approving review is required — you can merge your own pull request. The check just has to
+pass first, which is what keeps a broken build from reaching the live site.
 
 ---
 
