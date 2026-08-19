@@ -22,16 +22,37 @@ jobs:
     name: Purge everything
     runs-on: ubuntu-latest
     steps:
-      # -f so a bad token or wrong zone fails the run. Without it curl reports
-      # success on an HTTP error, which is the worst outcome for a button whose
-      # whole purpose is confirming something happened.
+      # Report what Cloudflare actually said. `curl -sf` fails the run but
+      # prints nothing, leaving only "exit code 22" to work from. The response
+      # body carries the real reason and contains no secrets.
       - name: Purge Cloudflare cache
-        run: |
-          curl -sf -X POST \
-            "https://api.cloudflare.com/client/v4/zones/${CLOUDFLARE_ZONE_ID}/purge_cache" \
-            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
-            -H "Content-Type: application/json" \
-            --data '{"purge_everything":true}'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+        run: |
+          set -euo pipefail
+
+          : "${CLOUDFLARE_API_TOKEN:?not set — add it under Settings > Secrets and variables > Actions}"
+          : "${CLOUDFLARE_ZONE_ID:?not set — add it under Settings > Secrets and variables > Actions}"
+
+          status=$(curl -sS -o response.json -w '%{http_code}' -X POST \
+            "https://api.cloudflare.com/client/v4/zones/${CLOUDFLARE_ZONE_ID}/purge_cache" \
+            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}')
+
+          echo "HTTP $status"
+          jq . response.json 2>/dev/null || cat response.json
+
+          if [ "$status" != "200" ]; then
+            code=$(jq -r '.errors[0].code // empty' response.json 2>/dev/null || true)
+            case "$code" in
+              10000) hint="the API token lacks the 'Zone > Cache Purge' permission, or has expired" ;;
+              7003)  hint="CLOUDFLARE_ZONE_ID does not match a zone this token can reach" ;;
+              *)     hint="see the response above" ;;
+            esac
+            echo "::error::Cloudflare rejected the purge (HTTP $status, error ${code:-none}) — $hint"
+            exit 1
+          fi
+
+          echo "Cache purged."
