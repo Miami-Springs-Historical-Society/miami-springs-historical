@@ -5,7 +5,7 @@ Static website for the [Miami Springs Historical Society](https://miamispringshi
 ## How it works
 
 ```
-Edit files → git commit → git push to main → GitHub Actions builds & deploys → site is live (~1 min)
+Edit files → git commit → git push to main → Cloudflare builds & deploys → site is live (~1 min)
 ```
 
 Content — events, board members, and site settings — is stored as plain files in this repo. There is intentionally **no admin/CMS panel** — content is edited directly in the files (see [Updating content](#updating-content)). Change a file, push it, and the site updates automatically.
@@ -147,7 +147,7 @@ miami-springs-historical/
 │   ├── dependabot.yml       # Weekly npm + GitHub Actions update PRs
 │   └── workflows/
 │       ├── ci.yml           # astro check + build on PRs to main
-│       ├── deploy.yml       # Build + deploy to Cloudflare on push to main
+│       ├── purge-cache.yml  # Manual Cloudflare cache purge (on demand only)
 │       ├── audit.yml        # Monthly npm audit; alerts on new advisories
 │       └── dependabot-auto-merge.yml  # Auto-merges non-major Dependabot PRs
 ├── CLAUDE.md                # Conventions for AI-assisted edits
@@ -190,7 +190,8 @@ The site targets WCAG 2.1 AA compliance:
 |---|---|
 | [Astro 7](https://astro.build) | Static site framework |
 | [Cloudflare Workers](https://workers.cloudflare.com) | Hosting, CDN, and edge Worker |
-| GitHub Actions | CI (type check + build on PRs), CD (deploy on push to main), monthly dependency audit |
+| GitHub Actions | CI (type check + build on PRs), monthly dependency audit |
+| Cloudflare Workers Builds | Builds and deploys every push to `main`, straight from git |
 | Markdown | Content authoring for events and board members |
 | TypeScript + Zod | Schema validation for content collections |
 | `@astrojs/sitemap` | Automatic sitemap generation |

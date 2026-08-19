@@ -1,0 +1,37 @@
+name: Purge Cloudflare cache
+
+# On demand only — nothing triggers this automatically, and it is not part of
+# deploying. Cloudflare Workers Builds deploys every push to main on its own.
+#
+# You should rarely need this. Assets are served with
+# `Cache-Control: public, max-age=0, must-revalidate` and a content-derived
+# ETag, so replacing a file makes caches revalidate and fetch the new bytes.
+# It exists for the case where that stops being true — a Cache Rule or Page
+# Rule added in the Cloudflare dashboard can override origin cache headers,
+# and nothing in this repo would show it.
+#
+# Run it from the Actions tab ("Run workflow"), or:
+#   gh workflow run purge-cache.yml
+on:
+  workflow_dispatch: {}
+
+permissions: {}
+
+jobs:
+  purge:
+    name: Purge everything
+    runs-on: ubuntu-latest
+    steps:
+      # -f so a bad token or wrong zone fails the run. Without it curl reports
+      # success on an HTTP error, which is the worst outcome for a button whose
+      # whole purpose is confirming something happened.
+      - name: Purge Cloudflare cache
+        run: |
+          curl -sf -X POST \
+            "https://api.cloudflare.com/client/v4/zones/${CLOUDFLARE_ZONE_ID}/purge_cache" \
+            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}

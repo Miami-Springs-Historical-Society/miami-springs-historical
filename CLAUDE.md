@@ -48,6 +48,6 @@ The site targets WCAG 2.1 AA. When adding new sections or components:
 
 ## Deployment
 
-Pushing to `main` automatically builds and deploys via GitHub Actions. The site is static — Astro generates HTML at build time, served via Cloudflare Workers.
+Pushing to `main` automatically builds and deploys via Cloudflare Workers Builds (configured in the Cloudflare dashboard, not in this repo — GitHub Actions only runs the PR checks). The site is static — Astro generates HTML at build time, served via Cloudflare Workers.
 
 Verify changes locally before pushing: `npm run build`.
