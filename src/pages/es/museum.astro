@@ -1,4 +1,16 @@
 ---
+import { Image } from 'astro:assets';
+import museumHomestead from '../../assets/museum-homestead.jpg';
+import museumEastern from '../../assets/museum-eastern.jpg';
+import curtissSchool1912 from '../../assets/curtiss-school-1912.jpg';
+import museumPanam from '../../assets/museum-panam.jpg';
+import kelloggSanitarium1928 from '../../assets/kellogg-sanitarium-1928.jpg';
+import museumFlamingos from '../../assets/museum-flamingos.jpg';
+
+// The exhibit column is a fixed 494px on desktop. Widths are capped at
+// each source so Astro is never asked to upscale a scan.
+const exhibitWidths = (img: { width: number }) =>
+  [400, 500, 700].filter(w => w < img.width).concat(Math.min(img.width, 1000));
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
@@ -64,7 +76,15 @@ const t = useTranslations(Astro.currentLocale);
             <p>{t('museum.exhibit_1_body')}</p>
           </div>
           <div class="exhibit-image-wrap">
-            <img src="/museum-homestead.jpg" alt="Historical exhibit on the City of Miami Springs" class="exhibit-image" />
+            <Image
+              src={museumHomestead}
+              alt="Historical exhibit on the City of Miami Springs"
+              class="exhibit-image"
+              widths={exhibitWidths(museumHomestead)}
+              sizes="(max-width: 768px) 100vw, (max-width: 1100px) 46vw, 494px"
+              format="webp"
+              quality={75}
+            />
           </div>
         </div>
 
@@ -74,7 +94,15 @@ const t = useTranslations(Astro.currentLocale);
             <p>{t('museum.exhibit_2_body')}</p>
           </div>
           <div class="exhibit-image-wrap">
-            <img src="/museum-eastern.jpg" alt="Stewardess uniforms and airline memorabilia exhibit" class="exhibit-image exhibit-image--portrait" />
+            <Image
+              src={museumEastern}
+              alt="Stewardess uniforms and airline memorabilia exhibit"
+              class="exhibit-image exhibit-image--portrait"
+              widths={exhibitWidths(museumEastern)}
+              sizes="(max-width: 768px) 100vw, (max-width: 1100px) 46vw, 494px"
+              format="webp"
+              quality={75}
+            />
           </div>
         </div>
 
@@ -84,7 +112,15 @@ const t = useTranslations(Astro.currentLocale);
             <p set:html={t('museum.exhibit_3_body')} />
           </div>
           <div class="exhibit-image-wrap">
-            <img src="/curtiss-school-1912.jpg" alt="Glenn Curtiss flight school students, 1912" class="exhibit-image exhibit-image--portrait exhibit-image--offset" />
+            <Image
+              src={curtissSchool1912}
+              alt="Glenn Curtiss flight school students, 1912"
+              class="exhibit-image exhibit-image--portrait exhibit-image--offset"
+              widths={exhibitWidths(curtissSchool1912)}
+              sizes="(max-width: 768px) 100vw, (max-width: 1100px) 46vw, 494px"
+              format="webp"
+              quality={75}
+            />
           </div>
         </div>
 
@@ -94,7 +130,15 @@ const t = useTranslations(Astro.currentLocale);
             <p>{t('museum.exhibit_4_body')}</p>
           </div>
           <div class="exhibit-image-wrap">
-            <img src="/museum-panam.jpg" alt="Pan American Airways Dinner Key diorama exhibit" class="exhibit-image exhibit-image--portrait" />
+            <Image
+              src={museumPanam}
+              alt="Pan American Airways Dinner Key diorama exhibit"
+              class="exhibit-image exhibit-image--portrait"
+              widths={exhibitWidths(museumPanam)}
+              sizes="(max-width: 768px) 100vw, (max-width: 1100px) 46vw, 494px"
+              format="webp"
+              quality={75}
+            />
           </div>
         </div>
 
@@ -105,7 +149,15 @@ const t = useTranslations(Astro.currentLocale);
             <a href="https://www.miamisprings-fl.gov/community/page/hotel-country-club-fairhavens" target="_blank" rel="noopener noreferrer" class="exhibit-link">{t('museum.exhibit_5_link')}</a>
           </div>
           <div class="exhibit-image-wrap">
-            <img src="/kellogg-sanitarium-1928.jpg" alt="Kellogg Southern Sanitarium, Miami Springs, 1928" class="exhibit-image" />
+            <Image
+              src={kelloggSanitarium1928}
+              alt="Kellogg Southern Sanitarium, Miami Springs, 1928"
+              class="exhibit-image"
+              widths={exhibitWidths(kelloggSanitarium1928)}
+              sizes="(max-width: 768px) 100vw, (max-width: 1100px) 46vw, 494px"
+              format="webp"
+              quality={75}
+            />
             <p class="photo-credit">Jesse S. Wooley, 1928. Floyd and Marion Rinhart Photograph Collection, University of Miami Libraries. Public domain.</p>
           </div>
         </div>
@@ -116,7 +168,15 @@ const t = useTranslations(Astro.currentLocale);
             <p>{t('museum.exhibit_6_body')}</p>
           </div>
           <div class="exhibit-image-wrap">
-            <img src="/museum-flamingos.jpg" alt="Flamingo flamboyance exhibit" class="exhibit-image exhibit-image--portrait" />
+            <Image
+              src={museumFlamingos}
+              alt="Flamingo flamboyance exhibit"
+              class="exhibit-image exhibit-image--portrait"
+              widths={exhibitWidths(museumFlamingos)}
+              sizes="(max-width: 768px) 100vw, (max-width: 1100px) 46vw, 494px"
+              format="webp"
+              quality={75}
+            />
           </div>
         </div>
       </section>
