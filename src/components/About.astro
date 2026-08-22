@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import museumExterior from '../assets/museum-exterior.jpg';
 import generalSettings from '../data/general.json';
 import { useTranslations } from '../i18n/utils';
 const t = useTranslations(Astro.currentLocale);
@@ -84,7 +86,14 @@ const slides = [
 
       <div class="museum-teaser">
         <div class="museum-teaser-image-wrap">
-          <img src="/museum-exterior.jpg" alt="Miami Springs Historical Society Museum at 501 East Drive" class="museum-teaser-image" />
+          <Image
+            src={museumExterior}
+            alt={t('about.teaser_image_alt')}
+            class="museum-teaser-image"
+            widths={[400, 500, 700, 1000]}
+            sizes="(max-width: 768px) 100vw, (max-width: 1100px) 46vw, 494px"
+            format="webp"
+          />
         </div>
         <div class="museum-teaser-text">
           <h3 class="museum-teaser-heading">{t('about.teaser_heading')}</h3>
