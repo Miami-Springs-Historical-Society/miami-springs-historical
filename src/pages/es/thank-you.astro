@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import bannerImage from '../../assets/curtiss-memorial-circle.jpg';
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
@@ -19,10 +21,14 @@ const t = useTranslations(Astro.currentLocale);
 
     <!-- Banner -->
     <div class="banner" role="img" aria-label="Círculo Memorial Glenn H. Curtiss, Miami Springs">
-      <img
-        src="/curtiss-memorial-circle.jpg"
+      <Image
+        src={bannerImage}
         alt="Círculo Memorial Glenn H. Curtiss, el corazón de Miami Springs"
         class="banner-img"
+        widths={[640, 960, 1400]}
+        sizes="100vw"
+        format="webp"
+        quality={72}
         loading="eager"
         fetchpriority="high"
       />

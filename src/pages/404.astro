@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import bgImage from '../assets/circle-park-1926.jpg';
 import Layout from '../layouts/Layout.astro';
 import { useTranslations } from '../i18n/utils';
 const t = useTranslations(Astro.currentLocale);
@@ -14,10 +16,15 @@ const t = useTranslations(Astro.currentLocale);
 >
   <main id="main-content" class="not-found">
     <div class="image-wrap">
-      <img
-        src="/circle-park-1926.jpg"
+      <Image
+        src={bgImage}
         alt="Cars entering Country Club Estates, Miami Springs, February 1926"
         class="bg-image"
+        widths={[400, 600]}
+        sizes="100vw"
+        format="webp"
+        quality={70}
+        loading="eager"
       />
       <div class="overlay"></div>
     </div>

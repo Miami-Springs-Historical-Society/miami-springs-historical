@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import bgImage from '../assets/miami-springs-motorcoach.jpg';
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -16,10 +18,14 @@ const t = useTranslations(Astro.currentLocale);
 
   <main id="main-content" class="welcome" aria-labelledby="welcome-heading">
     <div class="image-wrap">
-      <img
-        src="/miami-springs-motorcoach.jpg"
+      <Image
+        src={bgImage}
         alt="A vintage automobile and motor coach parked before a Pueblo Revival building among palm trees in early Miami Springs"
         class="bg-image"
+        widths={[640, 960, 1280, 1920]}
+        sizes="100vw"
+        format="webp"
+        quality={70}
         loading="eager"
         fetchpriority="high"
       />
