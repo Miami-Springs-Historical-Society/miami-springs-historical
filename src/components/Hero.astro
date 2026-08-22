@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import heroImage from '../assets/curtiss-mansion-entrance.jpg';
 import generalSettings from '../data/general.json';
 import { useTranslations } from '../i18n/utils';
 const t = useTranslations(Astro.currentLocale);
@@ -7,10 +9,14 @@ const t = useTranslations(Astro.currentLocale);
 
 <section class="hero" aria-labelledby="hero-heading">
   <div class="hero-image-wrap">
-    <img
-      src="/curtiss-mansion-entrance.jpg"
+    <Image
+      src={heroImage}
       alt={t('hero.image_alt')}
       class="hero-image"
+      widths={[640, 960, 1280, 1920]}
+      sizes="100vw"
+      format="webp"
+      quality={70}
       loading="eager"
       fetchpriority="high"
     />
