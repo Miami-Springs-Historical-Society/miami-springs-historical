@@ -13,8 +13,15 @@ const {
   noindex = false,
 } = Astro.props;
 
+import { getImage } from 'astro:assets';
+import heroImage from '../assets/curtiss-mansion-entrance.jpg';
 import { useTranslations } from '../i18n/utils';
 const t = useTranslations(lang);
+
+// Social crawlers still handle WebP inconsistently, so the share image is
+// generated as a JPEG at the 1.91:1 ratio Facebook and Twitter expect, rather
+// than reusing the hero's WebP variants.
+const ogImage = await getImage({ src: heroImage, width: 1200, height: 630, format: 'jpeg' });
 
 const site = 'https://miamispringshistoricalsociety.com';
 const pathname = Astro.url.pathname;
@@ -49,12 +56,14 @@ const esUrl = site + esPath;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={Astro.url.href} />
-    <meta property="og:image" content="https://miamispringshistoricalsociety.com/curtiss-mansion-entrance.jpg" />
+    <meta property="og:image" content={new URL(ogImage.src, site).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={t('hero.og_image_alt')} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://miamispringshistoricalsociety.com/curtiss-mansion-entrance.jpg" />
+    <meta name="twitter:image" content={new URL(ogImage.src, site).href} />
     <title>{title}</title>
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",

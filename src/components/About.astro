@@ -1,14 +1,26 @@
 ---
+import { Image } from 'astro:assets';
+import museumExterior from '../assets/museum-exterior.jpg';
+import glennCurtissPortrait from '../assets/glenn-curtiss-portrait.jpg';
+import curtissMansion1927 from '../assets/curtiss-mansion-1927.jpg';
+import easternConstellation from '../assets/eastern-airlines-constellation.jpg';
+import curtissMemorialCircle from '../assets/curtiss-memorial-circle.jpg';
+
 import generalSettings from '../data/general.json';
 import { useTranslations } from '../i18n/utils';
 const t = useTranslations(Astro.currentLocale);
 const base = Astro.currentLocale === 'es' ? '/es' : '';
 
+// Sources range from 600px to 1400px wide, so each slide's widths are capped
+// at its own source rather than shared — Astro will not upscale past it.
+const panelWidths = (img: { width: number }) =>
+  [480, 800, 1200, 1600].filter(w => w < img.width).concat(img.width);
+
 const slides = [
   {
     id: 'founding',
     title: t('about.slide_1_title'),
-    image: '/glenn-curtiss-portrait.jpg',
+    image: glennCurtissPortrait,
     imageAlt: 'Portrait of Glenn Hammond Curtiss, aviation pioneer and founder of Miami Springs',
     credit: 'Harris & Ewing. Library of Congress, Prints & Photographs Division. Public Domain.',
     sepia: true,
@@ -20,7 +32,7 @@ const slides = [
   {
     id: 'architecture',
     title: t('about.slide_2_title'),
-    image: '/curtiss-mansion-1927.jpg',
+    image: curtissMansion1927,
     imageAlt: 'The Curtiss Mansion, circa 1927',
     credit: 'Fishbaugh, W.A. (William Arthur). State Archives of Florida, Florida Memory. Public Domain.',
     sepia: false,
@@ -31,7 +43,7 @@ const slides = [
   {
     id: 'eastern',
     title: t('about.slide_3_title'),
-    image: '/eastern-airlines-constellation.jpg',
+    image: easternConstellation,
     imageAlt: 'Eastern Airlines Super-C Constellation over Miami Beach',
     credit: 'Wikimedia Commons. Public Domain.',
     sepia: false,
@@ -44,7 +56,7 @@ const slides = [
   {
     id: 'centennial',
     title: t('about.slide_4_title'),
-    image: '/curtiss-memorial-circle.jpg',
+    image: curtissMemorialCircle,
     imageAlt: 'Glenn H. Curtiss Memorial Circle, Miami Springs, Florida',
     credit: 'Eisenthesky Productions released to public domain per file information., CC BY-SA 4.0, via Wikimedia Commons',
     sealBg: true,
@@ -84,7 +96,14 @@ const slides = [
 
       <div class="museum-teaser">
         <div class="museum-teaser-image-wrap">
-          <img src="/museum-exterior.jpg" alt="Miami Springs Historical Society Museum at 501 East Drive" class="museum-teaser-image" />
+          <Image
+            src={museumExterior}
+            alt={t('about.teaser_image_alt')}
+            class="museum-teaser-image"
+            widths={[400, 500, 700, 1000]}
+            sizes="(max-width: 768px) 100vw, (max-width: 1100px) 46vw, 494px"
+            format="webp"
+          />
         </div>
         <div class="museum-teaser-text">
           <h3 class="museum-teaser-heading">{t('about.teaser_heading')}</h3>
@@ -107,8 +126,16 @@ const slides = [
         {slide.layout === 'portrait' ? (
           <>
             <div class="portrait-image-wrap">
+              {/* Deliberately a plain <img>, not <Image />. This is the only
+                  panel using object-fit: contain, and its box has no fixed
+                  height — so it sizes itself from the image's own ratio. The
+                  explicit width/height <Image /> emits pins that ratio, the box
+                  stops matching the photo, and contain letterboxes it, leaving
+                  the tan border tracing empty space above and below. cover hides
+                  that everywhere else. Optimizing this one needs the CSS reworked
+                  first; the source is only 118 KB. */}
               <img
-                src={slide.image}
+                src={slide.image.src}
                 alt={slide.imageAlt}
                 class={`portrait-img${slide.sepia ? ' panel-image--sepia' : ''}`}
               />
@@ -122,11 +149,15 @@ const slides = [
           </>
         ) : (
           <>
-            <img
+            <Image
               src={slide.image}
               alt={slide.imageAlt}
               class={`panel-image${slide.sepia ? ' panel-image--sepia' : ''}`}
               style={slide.imagePosition ? `object-position: ${slide.imagePosition}` : undefined}
+              widths={panelWidths(slide.image)}
+              sizes="(max-width: 1100px) 100vw, 1036px"
+              format="webp"
+              quality={75}
             />
             <div class={`panel-text${slide.panelStyle ? ` panel-text--${slide.panelStyle}` : ''}${slide.sealBg ? ' panel-text--seal' : ''}`}>
               <h3 class="panel-title">{slide.title}</h3>

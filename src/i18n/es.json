@@ -18,7 +18,7 @@
     "aria_label": "Navegación principal"
   },
   "hero": {
-    "image_alt": "Las puertas de entrada abiertas de la Mansión Curtiss, Miami Springs",
+    "image_alt": "La entrada a la Mansión Curtiss, Miami Springs, enmarcada por pilares de piedra de estilo Pueblo Revival",
     "og_image_alt": "La entrada de la Mansión Curtiss, Miami Springs",
     "eyebrow": "Miami Springs · Est. 1926",
     "title_line1": "Miami Springs",
@@ -34,6 +34,7 @@
     "teaser_heading": "Nuestro Museo",
     "teaser_body": "Nuestro museo cuenta con tres salas de exhibiciones que abarcan la historia de la aviación en Miami Springs, la fundación y el crecimiento de la ciudad, y la notable historia del Sanatorio Battle Creek de Miami. Multimedia interactiva, artefactos, recuerdos y una pequeña tienda de regalos — todo de entrada gratuita.",
     "teaser_link": "Explorar el Museo →",
+    "teaser_image_alt": "El Museo de la Sociedad Histórica de Miami Springs en 501 East Drive, con una gran reproducción de la portada de Glenn Curtiss en la revista TIME en su fachada",
     "info_visit": "Visítanos",
     "info_hours": "Horario del Museo",
     "info_contact": "Contacto",

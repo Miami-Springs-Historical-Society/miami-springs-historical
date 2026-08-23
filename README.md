@@ -74,7 +74,46 @@ photo: "/jane-smith.jpg"   # optional
 For a vacant seat, set `vacant: true` and omit `name` — the seat still renders, showing the role with a "vacant" label. Setting `name: "TBD"` instead hides the seat from the site entirely.
 
 ### Images
-Drop files into `public/`. Reference them in components as `/filename.jpg`.
+
+Photographs go in **`src/assets/`**, are imported, and are rendered with `<Image />`:
+
+```astro
+---
+import { Image } from 'astro:assets';
+import museum from '../assets/museum-exterior.jpg';
+---
+<Image
+  src={museum}
+  alt="..."
+  widths={[400, 500, 700, 1000]}
+  sizes="(max-width: 768px) 100vw, 494px"
+  format="webp"
+/>
+```
+
+Astro then converts to WebP, generates a `srcset` at those widths, and writes intrinsic
+`width`/`height` so the page doesn't shift as images load. `sizes` must describe the slot the
+image actually occupies — get it wrong and the browser downloads a file larger than it can
+display. `widths` must not exceed the source, since Astro will not upscale.
+
+`public/` is for files that need a fixed URL and no processing: favicons, `site.webmanifest`,
+`robots.txt`, `_headers`, and images referenced from CSS. **Anything in `public/` is copied
+verbatim** — no format conversion, no resizing, no hashed filenames. A photograph left there
+is served at full size to every phone.
+
+Three things to know:
+
+- A broken import fails the build; a broken `/public-path.jpg` fails silently and ships a
+  broken image. Prefer imports.
+- `<Image />` defaults to `loading="lazy"`. Anything above the fold needs `loading="eager"`,
+  and the LCP image also wants `fetchpriority="high"`.
+- Images under `object-fit: contain` in a box without a fixed height can letterbox once
+  `<Image />` adds explicit dimensions. `.portrait-img` in `About.astro` is left as a plain
+  `<img>` for exactly this reason.
+
+Board member photos are the one exception: they come from a Markdown field rather than an
+import, so they still live in `public/` and are unoptimized. Routing them through the pipeline
+needs the `image()` helper in the collection schema — worth doing if photos are ever added.
 
 ## Internationalization
 
@@ -104,8 +143,9 @@ To update translations, edit `src/i18n/es.json`. Every key in `en.json` should h
 
 ```
 miami-springs-historical/
-├── public/                  # Static assets (images, favicon, _headers)
+├── public/                  # Served verbatim — favicons, manifest, robots.txt, _headers
 ├── src/
+│   ├── assets/              # Photographs — imported, optimized at build
 │   ├── components/          # Page sections
 │   │   ├── Nav.astro        # Navigation with language switcher
 │   │   ├── Hero.astro       # Full-bleed hero with CTA

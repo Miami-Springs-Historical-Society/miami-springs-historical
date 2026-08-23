@@ -198,7 +198,8 @@ All content is stored as files in this repository:
 | Events | `src/content/events/` — one `.md` file per event |
 | Board members | `src/content/board/` — one `.md file` per member |
 | Resources page links | `src/data/resources.ts` |
-| Images | `public/` |
+| Photographs | `src/assets/` — imported and rendered with `<Image />` |
+| Favicons, manifest, CSS-referenced images | `public/` — served verbatim, no optimization |
 
 `main` is protected — it takes pull requests, not direct pushes.
 

@@ -21,6 +21,7 @@ Dynamic content is stored as Markdown files, not in components:
 - **Board members** → `src/content/board/` — one `.md` file per board member
 - **Resources page links** → `src/data/resources.ts`
 - **Site settings** (email, phone, Facebook URL) → `src/data/general.json`
+- **Photographs** → `src/assets/`, imported and rendered with `<Image />` from `astro:assets` — never `public/`, which is copied verbatim and skips optimization entirely
 - **Museum hours** → `src/i18n/en.json` under `footer.hours` (also update `es.json` and `src/data/general.json`)
 
 ## Design system
