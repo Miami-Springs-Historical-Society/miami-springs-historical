@@ -8,6 +8,9 @@ snapshots. Preserved here so the writing isn't lost — **this is not live site 
 > Original page images were Wix-hosted with non-descriptive filenames; they are not
 > copied here. To retrieve any, open the Wayback snapshot linked under each section.
 
+See also [`images/`](./images/) — photographs of the museum and its exhibits that are not
+currently used on the site, preserved rather than deleted.
+
 ---
 
 ## History
