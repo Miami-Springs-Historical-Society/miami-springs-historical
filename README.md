@@ -19,7 +19,7 @@ npm run build      # verify production build locally
 npx astro check    # type check (same as CI)
 ```
 
-Node 22 (see `.node-version`).
+Node 26 (see `.node-version`).
 
 ## Updating content
 
@@ -123,7 +123,7 @@ The site is fully bilingual (English / Spanish) on `main`. Spanish pages live un
 - The `useTranslations(locale)` helper in `src/i18n/utils.ts` looks up keys with dot notation and falls back to English if a key is missing
 - All components use `const t = useTranslations(Astro.currentLocale)` to get locale-appropriate strings
 - Astro's i18n routing (`astro.config.mjs`) handles the `/es/` prefix — the default locale (English) has no prefix
-- A Cloudflare Worker (`worker.ts`) redirects Spanish-preferring browsers to `/es` on first visit based on `Accept-Language`, and a `lang` cookie persists the user's explicit choice when they switch manually
+- An inline script in `src/layouts/Layout.astro` redirects Spanish-preferring browsers (`navigator.language`) to `/es` on first visit, and a `lang` cookie persists the user's explicit choice when they switch manually
 
 To update translations, edit `src/i18n/es.json`. Every key in `en.json` should have a corresponding key in `es.json`.
 
@@ -180,7 +180,6 @@ miami-springs-historical/
 │       └── es/              # Spanish equivalents of all pages
 ├── docs/
 │   └── archive/             # Reference copy of the former Wix site's content
-├── worker.ts                # Cloudflare Worker — static assets + language detection/redirect
 ├── wrangler.jsonc           # Cloudflare Workers configuration
 ├── astro.config.mjs         # Astro config (i18n, sitemap, build-time CSP script hashes)
 ├── .github/

@@ -16,15 +16,15 @@ Push to main → Cloudflare Workers Builds builds & deploys → site is live
 Deployment is configured in the Cloudflare dashboard, not in this repo. GitHub Actions runs the
 pull request checks and nothing else — it does not deploy.
 
-The build runs `npm run build`, producing a `dist/` folder of static assets. The Cloudflare
-Worker (`worker.ts`) serves those assets at the edge and handles automatic language detection
-for the bilingual site. Custom 404 handling is configured in `wrangler.jsonc`.
+The build runs `npm run build`, producing a `dist/` folder of static assets. Cloudflare serves
+those assets directly — there is no Worker script (`wrangler.jsonc` has no `main` entry). Custom
+404 handling is configured in `wrangler.jsonc`.
 
-### Language detection (Worker middleware)
+### Language detection (client-side)
 
-On each request, `worker.ts` checks:
+An inline script in `src/layouts/Layout.astro` runs on English pages and checks:
 1. A `lang` cookie set by the user's explicit language choice in the nav
-2. The `Accept-Language` request header
+2. The browser's language (`navigator.language`)
 
 If Spanish is preferred and the visitor is on an English URL (no `/es/` prefix), they are
 redirected to the Spanish equivalent. The cookie takes priority — once a user manually switches
@@ -121,11 +121,15 @@ Go to https://dash.cloudflare.com and log in.
 
 | Setting | Value |
 |---|---|
+| Production branch | `main` |
+| Builds for non-production branches | Enabled |
 | Build command | `npm run build` |
-| Deploy command | `npx wrangler@4.100.0 deploy` |
-| Non-production branch deploy command | `npx wrangler@4.100.0 versions upload` |
+| Deploy command | `npx wrangler deploy` |
+| Non-production branch deploy command | `npx wrangler versions upload` |
 | Build output directory | `dist` |
-| Root directory | *(leave blank)* |
+| Root directory | `/` |
+| Build watch paths — include | `*` |
+| Build watch paths — exclude | `node_modules/**`, `.git/` (default) |
 
 ### 4. Set Node version
 
@@ -133,7 +137,7 @@ Expand **Environment variables** and add:
 
 | Variable | Value |
 |---|---|
-| `NODE_VERSION` | `22` |
+| `NODE_VERSION` | `26` |
 
 > The `.node-version` file in the repo also signals this, but setting it explicitly
 > ensures compatibility across all Cloudflare build environments.
@@ -260,11 +264,10 @@ miami-springs-historical/
 │       ├── 404.astro        # Custom 404 page (English)
 │       ├── rss.xml.ts       # RSS feed
 │       └── es/              # Spanish equivalents of all pages
-├── worker.ts                # Cloudflare Worker entry point
 ├── wrangler.jsonc           # Cloudflare Workers config (assets, 404 handling)
 ├── astro.config.mjs         # Astro config (sitemap, i18n routing, output)
 ├── .github/workflows/       # CI and deploy workflows
-├── .node-version            # Pins Node 22
+├── .node-version            # Pins Node 26
 └── package.json
 ```
 
