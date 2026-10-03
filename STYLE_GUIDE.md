@@ -167,7 +167,8 @@ Every interactive element needs a hover change someone can actually perceive.
 - If the only change is color and the two states are under roughly `1.5:1` apart, add a second cue. A nav link going `--color-bg` → `--color-white` is a 1.08:1 change, i.e. nothing.
 - The second cue should be an underline, applied as a `border-bottom` that is present but `transparent` at rest so nothing reflows when it appears.
 - Never signal hover with italic, bold, or a size change — they alter text metrics, so the element shifts under the cursor.
-- Solid-fill buttons are the exception: darkening a large area of fill reads on its own and needs no underline.
+- Solid-fill buttons follow the same rule. Their fill darkening is only `1.39:1` (brown) and `1.5:1` (green), so they also underline their label on hover: `text-decoration: underline; text-underline-offset: 0.3em`. Text decoration doesn't change text metrics, so nothing shifts.
+- Outlined buttons (ghost) and cards already change two things, background and border, so they need nothing extra.
 
 ---
 
