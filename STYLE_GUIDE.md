@@ -2,43 +2,43 @@
 
 ## Colors
 
-All colors are defined as CSS custom properties in `src/layouts/Layout.astro`. **Never hardcode hex or rgba values in components.** Use these variables:
+All colors are defined as CSS custom properties in `src/layouts/Layout.astro`. **Never hardcode hex or rgba values in components.** Use these variables. Translucent swatches are shown over the page background (left) and body text color (right). After changing a color, run `node docs/swatches/generate.mjs` to redraw the swatches and flag rows here that no longer match.
 
-| Variable | Value | Use |
-|---|---|---|
-| `--color-primary` | `#8b4513` | Main brown — headings, buttons, links |
-| `--color-primary-dark` | `#6b3410` | Hover state for primary |
-| `--color-secondary` | `#d2b48c` | Tan — nav accents, decorative borders |
-| `--color-accent` | `#2c5f2d` | Forest green — dividers, hover links, donate buttons |
-| `--color-accent-dark` | `#1e4220` | Hover state for accent green elements |
-| `--color-eyebrow` | `#a8e6a9` | Light green — accent text on dark backgrounds |
-| `--color-bg` | `#faf6f0` | Off-white page background |
-| `--color-bg-alt` | `#e8d8c4` | Warm tan — alternate section backgrounds |
-| `--color-text` | `#2a1a0e` | Body text |
-| `--color-text-muted` | `#6b5040` | Secondary text |
-| `--color-white` | `#fff` | Pure white |
-| `--color-nav-bg` | `rgba(42,26,14,0.93)` | Nav bar background |
-| `--color-nav-bg-mobile` | `rgba(42,26,14,0.97)` | Nav mobile dropdown |
-| `--color-overlay-dark` | `rgba(42,26,14,0.82)` | Dark photo overlay |
-| `--color-overlay-light` | `rgba(250,246,240,0.88)` | Light panel overlay |
-| `--color-panel-text-light` | `rgba(250,246,240,0.92)` | Body text on dark panels |
-| `--color-panel-counter-light` | `rgba(250,246,240,0.7)` | Secondary text on dark panels |
-| `--color-panel-counter-dark` | `rgba(42,26,14,0.6)` | Secondary text on light panels |
-| `--color-footer-text` | `rgba(250,246,240,0.6)` | Footer body text |
-| `--color-footer-link-border` | `rgba(250,246,240,0.5)` | Footer link underline |
-| `--color-footer-link-border-hover` | `rgba(250,246,240,0.7)` | Footer link underline hover |
-| `--color-btn-ghost-border` | `rgba(255,255,255,0.55)` | Ghost button border |
-| `--color-btn-ghost-hover` | `rgba(255,255,255,0.08)` | Ghost button hover background |
-| `--color-facebook` | `#1877f2` | Facebook brand blue |
-| `--color-facebook-dark` | `#0f5cc9` | Facebook brand blue hover |
-| `--color-overlay-gradient-start` | `rgba(42,26,14,0.6)` | Photo overlay gradient top |
-| `--color-overlay-gradient-mid` | `rgba(42,26,14,0.75)` | Photo overlay gradient middle |
-| `--color-overlay-gradient-end` | `rgba(42,26,14,0.88)` | Photo overlay gradient bottom |
-| `--color-banner-overlay-start` | `rgba(42,26,14,0.35)` | Shorter banner overlay gradient top (lighter) |
-| `--color-banner-overlay-mid` | `rgba(42,26,14,0.72)` | Shorter banner overlay gradient middle |
-| `--color-photo-credit` | `rgba(255,255,255,0.5)` | Photo credit text on dark photo |
-| `--color-photo-credit-link` | `rgba(255,255,255,0.6)` | Photo credit link on dark photo |
-| `--color-photo-credit-link-hover` | `rgba(255,255,255,0.9)` | Photo credit link hover on dark photo |
+| | Variable | Value | Use |
+|---|---|---|---|
+| ![](docs/swatches/color-primary.svg) | `--color-primary` | `#8b4513` | Main brown — headings, buttons, links |
+| ![](docs/swatches/color-primary-dark.svg) | `--color-primary-dark` | `#6b3410` | Hover state for primary |
+| ![](docs/swatches/color-secondary.svg) | `--color-secondary` | `#d2b48c` | Tan — nav accents, decorative borders |
+| ![](docs/swatches/color-accent.svg) | `--color-accent` | `#2c5f2d` | Forest green — dividers, hover links, donate buttons |
+| ![](docs/swatches/color-accent-dark.svg) | `--color-accent-dark` | `#1e4220` | Hover state for accent green elements |
+| ![](docs/swatches/color-eyebrow.svg) | `--color-eyebrow` | `#a8e6a9` | Light green — accent text on dark backgrounds |
+| ![](docs/swatches/color-bg.svg) | `--color-bg` | `#faf6f0` | Off-white page background |
+| ![](docs/swatches/color-bg-alt.svg) | `--color-bg-alt` | `#e8d8c4` | Warm tan — alternate section backgrounds |
+| ![](docs/swatches/color-text.svg) | `--color-text` | `#2a1a0e` | Body text |
+| ![](docs/swatches/color-text-muted.svg) | `--color-text-muted` | `#6b5040` | Secondary text |
+| ![](docs/swatches/color-white.svg) | `--color-white` | `#fff` | Pure white |
+| ![](docs/swatches/color-nav-bg.svg) | `--color-nav-bg` | `rgba(42,26,14,0.93)` | Nav bar background |
+| ![](docs/swatches/color-nav-bg-mobile.svg) | `--color-nav-bg-mobile` | `rgba(42,26,14,0.97)` | Nav mobile dropdown |
+| ![](docs/swatches/color-overlay-dark.svg) | `--color-overlay-dark` | `rgba(42,26,14,0.82)` | Dark photo overlay |
+| ![](docs/swatches/color-overlay-light.svg) | `--color-overlay-light` | `rgba(250,246,240,0.88)` | Light panel overlay |
+| ![](docs/swatches/color-panel-text-light.svg) | `--color-panel-text-light` | `rgba(250,246,240,0.92)` | Body text on dark panels |
+| ![](docs/swatches/color-panel-counter-light.svg) | `--color-panel-counter-light` | `rgba(250,246,240,0.7)` | Secondary text on dark panels |
+| ![](docs/swatches/color-panel-counter-dark.svg) | `--color-panel-counter-dark` | `rgba(42,26,14,0.6)` | Secondary text on light panels |
+| ![](docs/swatches/color-footer-text.svg) | `--color-footer-text` | `rgba(250,246,240,0.6)` | Footer body text |
+| ![](docs/swatches/color-footer-link-border.svg) | `--color-footer-link-border` | `rgba(250,246,240,0.5)` | Footer link underline |
+| ![](docs/swatches/color-footer-link-border-hover.svg) | `--color-footer-link-border-hover` | `rgba(250,246,240,0.7)` | Footer link underline hover |
+| ![](docs/swatches/color-btn-ghost-border.svg) | `--color-btn-ghost-border` | `rgba(255,255,255,0.7)` | Ghost button border |
+| ![](docs/swatches/color-btn-ghost-hover.svg) | `--color-btn-ghost-hover` | `rgba(255,255,255,0.08)` | Ghost button hover background |
+| ![](docs/swatches/color-facebook.svg) | `--color-facebook` | `#1877f2` | Facebook brand blue |
+| ![](docs/swatches/color-facebook-dark.svg) | `--color-facebook-dark` | `#0f5cc9` | Facebook brand blue hover |
+| ![](docs/swatches/color-overlay-gradient-start.svg) | `--color-overlay-gradient-start` | `rgba(42,26,14,0.6)` | Photo overlay gradient top |
+| ![](docs/swatches/color-overlay-gradient-mid.svg) | `--color-overlay-gradient-mid` | `rgba(42,26,14,0.75)` | Photo overlay gradient middle |
+| ![](docs/swatches/color-overlay-gradient-end.svg) | `--color-overlay-gradient-end` | `rgba(42,26,14,0.88)` | Photo overlay gradient bottom |
+| ![](docs/swatches/color-banner-overlay-start.svg) | `--color-banner-overlay-start` | `rgba(42,26,14,0.35)` | Shorter banner overlay gradient top (lighter) |
+| ![](docs/swatches/color-banner-overlay-mid.svg) | `--color-banner-overlay-mid` | `rgba(42,26,14,0.72)` | Shorter banner overlay gradient middle |
+| ![](docs/swatches/color-photo-credit.svg) | `--color-photo-credit` | `rgba(255,255,255,0.5)` | Photo credit text on dark photo |
+| ![](docs/swatches/color-photo-credit-link.svg) | `--color-photo-credit-link` | `rgba(255,255,255,0.6)` | Photo credit link on dark photo |
+| ![](docs/swatches/color-photo-credit-link-hover.svg) | `--color-photo-credit-link-hover` | `rgba(255,255,255,0.9)` | Photo credit link hover on dark photo |
 
 ### Contrast rules (WCAG 2.1 AA)
 
