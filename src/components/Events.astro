@@ -66,6 +66,7 @@ const dateLocale = Astro.currentLocale === 'es' ? 'es-ES' : 'en-US';
             class="event-card"
             data-recurring={data.recurring ?? 'false'}
             data-recurring-start-after={data.recurringStartAfter?.toISOString().split('T')[0]}
+            data-time={data.time}
           >
             <div class="event-date">
               <span class="event-month">{formatMonth(data.date!)}</span>
@@ -95,23 +96,9 @@ const dateLocale = Astro.currentLocale === 'es' ? 'es-ES' : 'en-US';
 </section>
 
 <script>
-  // Recalculates recurring event dates client-side so stale static builds auto-update.
-  // NOTE: This mirrors src/utils/events.ts — update both if the logic changes.
-  function nextSecondTuesday(startAfter?: Date): Date {
-    const now = new Date();
-    const after = startAfter && startAfter > now ? startAfter : now;
-    for (let offset = 0; offset <= 3; offset++) {
-      const year = after.getFullYear() + Math.floor((after.getMonth() + offset) / 12);
-      const month = (after.getMonth() + offset) % 12;
-      const first = new Date(year, month, 1);
-      const daysUntilTuesday = (2 - first.getDay() + 7) % 7;
-      const secondTuesday = new Date(year, month, 1 + daysUntilTuesday + 7, 16, 30, 0);
-      if (secondTuesday > after) return secondTuesday;
-    }
-    const next = new Date(after.getFullYear(), after.getMonth() + 1, 1);
-    const daysUntilTuesday = (2 - next.getDay() + 7) % 7;
-    return new Date(next.getFullYear(), next.getMonth(), 1 + daysUntilTuesday + 7, 16, 30, 0);
-  }
+  // Recalculates recurring event dates in the browser so a stale static build still
+  // shows the next meeting. Same function as the build, so the two can't disagree.
+  import { nextSecondTuesday } from '../utils/events';
 
   const dateLocale = document.documentElement.lang === 'es' ? 'es-ES' : 'en-US';
 
@@ -120,7 +107,7 @@ const dateLocale = Astro.currentLocale === 'es' ? 'es-ES' : 'en-US';
 
     const startAfterStr = card.dataset.recurringStartAfter;
     const startAfter = startAfterStr ? new Date(startAfterStr) : undefined;
-    const next = nextSecondTuesday(startAfter);
+    const next = nextSecondTuesday(card.dataset.time, startAfter);
 
     const monthEl = card.querySelector('.event-month');
     const dayEl = card.querySelector('.event-day');

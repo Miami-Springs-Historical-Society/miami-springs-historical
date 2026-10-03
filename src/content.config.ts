@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { parseStartTime } from './utils/events';
 
 const events = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/events' }),
@@ -16,6 +17,9 @@ const events = defineCollection({
   }).refine(
     data => data.recurring || data.date,
     { message: 'Either "date" or "recurring" must be set on every event' }
+  ).refine(
+    data => !data.recurring || parseStartTime(data.time),
+    { message: 'Recurring events need a "time" the site can read, like "4:30 PM"', path: ['time'] }
   ),
 });
 
