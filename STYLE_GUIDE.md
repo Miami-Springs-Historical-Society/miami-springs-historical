@@ -52,7 +52,8 @@ All colors are defined as CSS custom properties in `src/layouts/Layout.astro`. *
 
 - Normal text on any background: **4.5:1 minimum**
 - Large text (≥ 1.5rem bold or ≥ 2rem): **3:1 minimum**
-- Non-text elements that identify a control or carry meaning (button and input boundaries, focus rings, icons): **3:1 minimum** against adjacent colors
+- Non-text elements that carry meaning (focus rings, icons, icon-only buttons, form input boundaries): **3:1 minimum** against adjacent colors
+- A button with a text label doesn't need a 3:1 edge under WCAG, because the label identifies it. The tan border on small buttons on the dark bars is a site rule (see Accessibility → Contrast)
 - Purely decorative lines — the thin `--color-secondary` rules between items and sections — are exempt (WCAG 1.4.11 only covers meaningful graphics and controls)
 - Dark green (`--color-accent`) **must not** be used for text or icons on the dark nav background — use `--color-secondary` instead
 - Dark green **must not** be used for decorative elements on dark overlays — use `--color-eyebrow` instead
@@ -151,7 +152,7 @@ Shared by every variant: `--font-body`, `0.8125rem`, uppercase, `letter-spacing:
 
 **Nav pills (JOIN / DONATE in the menu):**
 - Padding: `0.3rem 0.875rem`, `letter-spacing: 0.08em`
-- Border: `1px solid --color-secondary` — **required**, not decorative. Both fills sit at roughly 2.2–2.4:1 against the nav bar, so the border is what carries the 3:1 boundary contrast, and it holds on hover where the fills darken further.
+- Border: `1px solid --color-secondary`, required by the site rule for small buttons on the dark bars (see Accessibility → Contrast), not decorative. Both fills sit at roughly 2.2–2.4:1 against the nav bar, so the border is what shows they're buttons, and it holds on hover where the fills darken further.
 - JOIN uses `--color-primary`, DONATE uses `--color-accent`. Membership signup is not a donation, so it does not take the green.
 
 ### Button groups
@@ -195,13 +196,13 @@ This site targets **WCAG 2.1 AA**.
 Two different thresholds, and it's easy to meet one while failing the other:
 
 - **Text — 4.5:1** against its background (WCAG 1.4.3 AA)
-- **Boundaries and non-text — 3:1** against *adjacent* colors (WCAG 1.4.11). This covers what makes a control identifiable as a control.
+- **Boundaries and non-text — 3:1** against *adjacent* colors (WCAG 1.4.11), for anything that can't be identified without it: focus rings, icons, icon-only buttons, form inputs. A button with a text label is identified by the label, so WCAG doesn't require its edge to reach 3:1.
 
-A filled button can pass the first and fail the second. Both nav pills do exactly that: white on them is 7.1:1 and 7.55:1, comfortably legible, while the fills are only 2.2–2.4:1 against the nav bar. Hence the required `--color-secondary` border.
+**Site rule, beyond WCAG: small buttons on the dark bars get a tan border.** The nav JOIN/DONATE pills and the footer Donate sit next to plain text links on the near-black nav and footer. Their fills are only 2.2–2.4:1 against the bar, so without an edge they read as colored text, not buttons. The `--color-secondary` border (3.6:1+ against the fills, 8.5:1 against the bar) fixes that. Large standalone buttons, like the hero's, read as buttons on their own and don't get it.
 
 When fixing a boundary, prefer adding a border over lightening the fill. Fills usually darken on hover, which re-breaks a fix made in the fill; a border color that doesn't change holds in every state.
 
-Check the worst case, not the typical one. `--color-btn-ghost-border` sits over a photograph, so the relevant background is the *brightest* area the photo can present, not its average. At `0.55` alpha that measured 2.99:1 and failed; `0.7` gives 3.80:1.
+Check the worst case, not the typical one. `--color-btn-ghost-border` sits over a photograph, so the relevant background is the *brightest* area the photo can present, not its average. At `0.55` alpha that measured 2.99:1, short of 3:1; `0.7` gives 3.80:1. An outlined button has no fill, so its border is its whole shape, and the site holds it to 3:1.
 
 ---
 
