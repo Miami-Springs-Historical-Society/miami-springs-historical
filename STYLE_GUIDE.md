@@ -2,7 +2,7 @@
 
 ## Colors
 
-All colors are defined as CSS custom properties in `src/layouts/Layout.astro`. **Never hardcode hex or rgba values in components.** Use these variables. Translucent swatches are shown over the page background (left) and body text color (right). After changing a color, run `node docs/swatches/generate.mjs` to redraw the swatches and flag rows here that no longer match.
+All colors are defined as CSS custom properties in `src/layouts/Layout.astro`. **Never hardcode hex or rgba values in components.** Use these variables. Translucent colors are shown over the kind of background they sit on: light tints over the dark text color, dark tints over the page background. After changing a color, run `node docs/swatches/generate.mjs` to redraw the swatches and flag rows here that no longer match.
 
 | | Variable | Value | Use |
 |---|---|---|---|

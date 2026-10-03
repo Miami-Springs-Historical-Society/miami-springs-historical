@@ -3,9 +3,11 @@
 //
 // Run after changing a color:  node docs/swatches/generate.mjs
 //
-// Solid colors fill the swatch. Translucent colors are drawn over a light
-// half (--color-bg) and a dark half (--color-text) so the alpha is visible.
-// It also reports any STYLE_GUIDE.md table value that no longer matches.
+// Solid colors fill the swatch. Translucent colors are drawn over the kind of
+// background they're used on: light tints (cream, white) over --color-text,
+// dark tints (brown) over --color-bg, so each swatch looks roughly as it does
+// on the site. It also reports any STYLE_GUIDE.md table value that no longer
+// matches.
 
 import { readFileSync, writeFileSync, readdirSync, unlinkSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -26,10 +28,15 @@ const H = 24;
 
 const isTranslucent = (v) => /^rgba\(/.test(v) && !/,\s*1(\.0+)?\s*\)$/.test(v);
 
+// Light tints sit on dark backgrounds on the site, and dark tints on light ones.
+const backdrop = (v) => {
+  const [r, g, b] = v.match(/[\d.]+/g).map(Number);
+  return 0.299 * r + 0.587 * g + 0.114 * b > 128 ? dark : light;
+};
+
 const svg = (value) => {
   const body = isTranslucent(value)
-    ? `<rect width="${W / 2}" height="${H}" fill="${light}"/>` +
-      `<rect x="${W / 2}" width="${W / 2}" height="${H}" fill="${dark}"/>` +
+    ? `<rect width="${W}" height="${H}" fill="${backdrop(value)}"/>` +
       `<rect width="${W}" height="${H}" fill="${value}"/>`
     : `<rect width="${W}" height="${H}" fill="${value}"/>`;
   return (
