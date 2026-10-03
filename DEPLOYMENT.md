@@ -131,16 +131,11 @@ Go to https://dash.cloudflare.com and log in.
 | Build watch paths — include | `*` |
 | Build watch paths — exclude | `node_modules/**`, `.git/` (default) |
 
-### 4. Set Node version
+### 4. Node version
 
-Expand **Environment variables** and add:
-
-| Variable | Value |
-|---|---|
-| `NODE_VERSION` | `26` |
-
-> The `.node-version` file in the repo also signals this, but setting it explicitly
-> ensures compatibility across all Cloudflare build environments.
+Nothing to set. Workers Builds reads `.node-version` from the repo (the build log shows
+`Installing nodejs 26.x`), so changing Node is a one-line PR. Don't add a `NODE_VERSION`
+build variable — it would override the file and the two could drift apart.
 
 ### 5. Deploy
 
