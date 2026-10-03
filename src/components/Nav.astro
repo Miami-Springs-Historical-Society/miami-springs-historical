@@ -159,9 +159,9 @@ const base = isEs ? '/es' : '';
     color: var(--color-white) !important;
     padding: 0.3rem 0.875rem;
     letter-spacing: 0.08em;
-    /* WCAG 1.4.11: the fills alone sit at 2.2-2.4:1 against the nav bar, so the
-       pill boundary carries the 3:1 contrast instead (tan clears 3.6:1 against
-       both fills and 8.5:1 against the bar). */
+    /* Site rule (STYLE_GUIDE, beyond WCAG): the fills alone sit at 2.2-2.4:1
+       against the nav bar, so the pill boundary carries a 3:1 edge instead
+       (tan clears 3.6:1 against both fills and 8.5:1 against the bar). */
     border: 1px solid var(--color-secondary);
     transition: background-color 0.2s !important;
   }
