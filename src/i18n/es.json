@@ -1,7 +1,8 @@
 {
   "layout": {
     "skip_to_content": "Ir al contenido principal",
-    "opens_new_tab": "(se abre en nueva pestaña)"
+    "opens_new_tab": "(se abre en nueva pestaña)",
+    "next_steps": "Próximos pasos"
   },
   "nav": {
     "about": "Sobre nosotros",
@@ -76,7 +77,7 @@
     "attribution": "Foto principal: Wikimedia Commons, CC BY 2.0. Foto histórica: Fishbaugh, W.A., Archivos del Estado de Florida. Dominio público.",
     "link_city": "Ciudad de Miami Springs",
     "link_resources": "Recursos y Referencias",
-    "aria_facebook": "Síguenos en Facebook (se abre en nueva pestaña)",
+    "aria_facebook": "Síguenos en Facebook",
     "aria_email": "Envíanos un correo electrónico",
     "aria_rss": "Canal RSS"
   },
@@ -98,17 +99,23 @@
     "exhibits_heading": "Exhibiciones",
     "exhibit_1_title": "Ciudad de Miami Springs",
     "exhibit_1_body": "Traza la evolución de Miami Springs desde la visión de Glenn Curtiss y James Bright en la década de 1920 hasta un siglo de crecimiento comunitario — con fotografías, mapas e información histórica detallada.",
+    "exhibit_1_alt": "Exhibición histórica sobre la Ciudad de Miami Springs",
     "exhibit_2_title": "Historia de la Aviación y las Aerolíneas",
     "exhibit_2_body": "Una rica colección de recuerdos, uniformes y artefactos de aerolíneas que han servido a Miami — incluyendo Eastern Air Lines, Pan American Airways y más. Uniformes de azafatas a lo largo de décadas evocan la época dorada de la aviación.",
+    "exhibit_2_alt": "Exhibición de uniformes de azafatas y recuerdos de aerolíneas",
     "exhibit_3_title": "Escuelas de Aviación de Glenn Curtiss",
     "exhibit_3_body": "Las escuelas de aviación de Glenn Curtiss formaron a algunos de los pioneros más importantes de la historia aeronáutica — incluyendo a los primeros aviadores japoneses, de la India, cubanos y puertorriqueños. Entre ellos: <strong>Agustín Parlá</strong>, el «Padre de la Aviación Cubana», quien se formó en la escuela de Curtiss en Miami en 1912. Esta exhibición narra cómo Curtiss abrió la aviación al mundo.",
+    "exhibit_3_alt": "Estudiantes de la escuela de aviación de Glenn Curtiss, 1912",
     "exhibit_4_title": "Pan American Airways — Diorama de Dinner Key",
     "exhibit_4_body": "Una nueva exhibición con un detallado diorama de la histórica Terminal de Hidroaviones Flying Clipper de Pan American Airways en Dinner Key, hacia 1934 — uno de los puntos de referencia más evocadores de la época dorada de la aviación en Miami.",
+    "exhibit_4_alt": "Exhibición del diorama de Pan American Airways en Dinner Key",
     "exhibit_5_title": "Sanatorio Battle Creek de Miami — Video Inmersivo",
     "exhibit_5_body": "Una sala de video inmersivo que explora el Hotel Country Club — construido por Glenn Curtiss en 1926 — y su transformación en el Sanatorio Battle Creek de Miami bajo el Dr. John Harvey Kellogg — vendido en 1929, inaugurado como sanatorio en 1931. El edificio en 201 Curtiss Parkway, Sitio Histórico de Miami Springs desde 1984, se convirtió posteriormente en hogar de ancianos y continúa en ese rol hoy.",
+    "exhibit_5_alt": "El Kellogg Southern Sanitarium, Miami Springs, 1928",
     "exhibit_5_link": "Registro histórico municipal →",
     "exhibit_6_title": "La Extravagancia de los Flamencos",
     "exhibit_6_body": "Una entrañable exhibición sobre las sorprendentes visitas de 2022 de una bandada de flamencos del Hipódromo de Hialeah a Miami Springs — un espectáculo natural inesperado que capturó la imaginación de la comunidad.",
+    "exhibit_6_alt": "Exhibición sobre la bandada de flamencos",
     "gift_heading": "Tienda de Regalos",
     "gift_body": "Explora nuestra tienda de regalos con artículos históricos únicos y recuerdos — todas las ganancias apoyan al museo. La Sociedad Histórica de Miami Springs es una organización sin fines de lucro 501(c)(3), por lo que tus compras y donaciones son deducibles de impuestos.",
     "donate_heading": "Donar Artefactos",
@@ -159,7 +166,9 @@
     "museum_cta": "Explora el Museo →",
     "facebook_cta": "Síguenos en Facebook →",
     "home_cta": "Volver a la Sociedad →",
-    "photo_credit": "Círculo Memorial Glenn H. Curtiss — Wikimedia Commons, CC BY-SA 4.0"
+    "photo_credit": "Círculo Memorial Glenn H. Curtiss — Wikimedia Commons, CC BY-SA 4.0",
+    "banner_label": "Círculo Memorial Glenn H. Curtiss, Miami Springs",
+    "banner_alt": "Círculo Memorial Glenn H. Curtiss, el corazón de Miami Springs"
   },
   "not_found": {
     "meta_title": "Página No Encontrada — Sociedad Histórica de Miami Springs",
@@ -168,7 +177,8 @@
     "heading": "Esta página nunca fue desarrollada.",
     "body": "Durante el auge inmobiliario de Florida en la década de 1920, se vendieron miles de lotes en Country Club Estates a compradores entusiastas, muchos de los cuales nunca llegaron a edificarse. Esta página parece ser uno de ellos.",
     "cta": "Volver a la Sociedad",
-    "photo_credit": "\"Autos entrando a Country Club Estates, Miami Springs,\" 24 de feb. de 1926. Fishbaugh, W. A."
+    "photo_credit": "\"Autos entrando a Country Club Estates, Miami Springs,\" 24 de feb. de 1926. Fishbaugh, W. A.",
+    "banner_alt": "Autos entrando a Country Club Estates, Miami Springs, febrero de 1926"
   },
   "membership": {
     "meta_title": "Bienvenido — Sociedad Histórica de Miami Springs",
@@ -179,6 +189,7 @@
     "museum_cta": "Explora el Museo",
     "facebook_cta": "Síguenos en Facebook",
     "home_cta": "Volver a la Sociedad",
-    "photo_credit": "Foto cortesía del concejal de Miami Springs Jorge Santin y del Glenn H. Curtiss Museum en Hammondsport, NY"
+    "photo_credit": "Foto cortesía del concejal de Miami Springs Jorge Santin y del Glenn H. Curtiss Museum en Hammondsport, NY",
+    "banner_alt": "Un automóvil antiguo y una casa rodante estacionados frente a un edificio de estilo Pueblo Revival entre palmeras en los primeros años de Miami Springs"
   }
 }

@@ -27,7 +27,7 @@ const t = useTranslations(Astro.currentLocale);
           <ul class="resource-list">
             {section.links.map(link => (
               <li class="resource-item">
-                <a href={link.url} target="_blank" rel="noopener noreferrer" class="resource-link">{link.label}</a>
+                <a href={link.url} target="_blank" rel="noopener noreferrer" class="resource-link" aria-label={`${link.label} ${t('layout.opens_new_tab')}`}>{link.label}</a>
                 {link.note && <p class="resource-note">{link.note}</p>}
               </li>
             ))}

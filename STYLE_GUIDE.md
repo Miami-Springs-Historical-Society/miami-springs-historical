@@ -23,7 +23,7 @@ All colors are defined as CSS custom properties in `src/layouts/Layout.astro`. *
 | ![](docs/swatches/color-overlay-light.svg) | `--color-overlay-light` | `rgba(250,246,240,0.88)` | Light panel overlay |
 | ![](docs/swatches/color-panel-text-light.svg) | `--color-panel-text-light` | `rgba(250,246,240,0.92)` | Body text on dark panels |
 | ![](docs/swatches/color-panel-counter-light.svg) | `--color-panel-counter-light` | `rgba(250,246,240,0.7)` | Secondary text on dark panels |
-| ![](docs/swatches/color-panel-counter-dark.svg) | `--color-panel-counter-dark` | `rgba(42,26,14,0.6)` | Secondary text on light panels |
+| ![](docs/swatches/color-panel-counter-dark.svg) | `--color-panel-counter-dark` | `rgba(42,26,14,0.7)` | Secondary text on light panels |
 | ![](docs/swatches/color-footer-text.svg) | `--color-footer-text` | `rgba(250,246,240,0.6)` | Footer body text |
 | ![](docs/swatches/color-footer-link-border.svg) | `--color-footer-link-border` | `rgba(250,246,240,0.5)` | Footer link underline |
 | ![](docs/swatches/color-footer-link-border-hover.svg) | `--color-footer-link-border-hover` | `rgba(250,246,240,0.7)` | Footer link underline hover |
@@ -39,12 +39,21 @@ All colors are defined as CSS custom properties in `src/layouts/Layout.astro`. *
 | ![](docs/swatches/color-photo-credit.svg) | `--color-photo-credit` | `rgba(255,255,255,0.5)` | Photo credit text on dark photo |
 | ![](docs/swatches/color-photo-credit-link.svg) | `--color-photo-credit-link` | `rgba(255,255,255,0.6)` | Photo credit link on dark photo |
 | ![](docs/swatches/color-photo-credit-link-hover.svg) | `--color-photo-credit-link-hover` | `rgba(255,255,255,0.9)` | Photo credit link hover on dark photo |
+| ![](docs/swatches/color-hero-overlay-start.svg) | `--color-hero-overlay-start` | `rgba(42,26,14,0.55)` | Home hero photo overlay gradient top |
+| ![](docs/swatches/color-hero-overlay-mid.svg) | `--color-hero-overlay-mid` | `rgba(42,26,14,0.68)` | Home hero photo overlay gradient middle |
+| ![](docs/swatches/color-hero-overlay-end.svg) | `--color-hero-overlay-end` | `rgba(42,26,14,0.78)` | Home hero photo overlay gradient bottom |
+| ![](docs/swatches/color-bg-texture.svg) | `--color-bg-texture` | `rgba(42,26,14,0.04)` | Crosshatch texture on section backgrounds |
+| ![](docs/swatches/color-shadow-heading.svg) | `--color-shadow-heading` | `rgba(0,0,0,0.6)` | Text shadow for large headings on photos |
+| ![](docs/swatches/color-shadow-text.svg) | `--color-shadow-text` | `rgba(0,0,0,0.7)` | Text shadow for eyebrows, body text and credits on photos |
+| ![](docs/swatches/color-shadow-text-strong.svg) | `--color-shadow-text-strong` | `rgba(0,0,0,0.8)` | Text shadow for small text on the home hero, the busiest photo |
+| ![](docs/swatches/color-shadow-card.svg) | `--color-shadow-card` | `rgba(0,0,0,0.06)` | Event card drop shadow |
 
 ### Contrast rules (WCAG 2.1 AA)
 
 - Normal text on any background: **4.5:1 minimum**
 - Large text (≥ 1.5rem bold or ≥ 2rem): **3:1 minimum**
-- Decorative non-text elements (borders, dividers): **3:1 minimum**
+- Non-text elements that identify a control or carry meaning (button and input boundaries, focus rings, icons): **3:1 minimum** against adjacent colors
+- Purely decorative lines — the thin `--color-secondary` rules between items and sections — are exempt (WCAG 1.4.11 only covers meaningful graphics and controls)
 - Dark green (`--color-accent`) **must not** be used for text or icons on the dark nav background — use `--color-secondary` instead
 - Dark green **must not** be used for decorative elements on dark overlays — use `--color-eyebrow` instead
 
@@ -136,7 +145,7 @@ Shared by every variant: `--font-body`, `0.8125rem`, uppercase, `letter-spacing:
 - Background: `--color-accent` / hover: `--color-accent-dark`
 - Text: `--color-white`
 - Border: `2px solid --color-accent`
-- Padding: `0.75rem 2rem` in the hero, `0.5rem 1.5rem` in the footer
+- Padding: `0.75rem 2rem` in the hero and on the museum page, `0.5rem 1.5rem` in the footer
 - Use exclusively for donation/financial support CTAs to visually distinguish them from navigation actions. Do not use for general page navigation.
 
 **Nav pills (JOIN / DONATE in the menu):**
@@ -147,7 +156,7 @@ Shared by every variant: `--font-body`, `0.8125rem`, uppercase, `letter-spacing:
 ### Button groups
 
 - Side by side above `640px`, `1rem` gap, centered
-- Below `640px`, stack in a column at equal width, `max-width: 22rem`, centered
+- Below `640px`, stack in a column at equal width, `max-width: 22rem`, centered, with side padding reduced to `1rem` so long labels still fit
 
 Equal width matters on the stack: left to wrap naturally, a button's width tracks its label length, so the longest label wins the most visual weight regardless of importance — and Spanish labels run considerably longer than English. Stacked at one width, emphasis comes from color, which is the part you control.
 
@@ -168,10 +177,12 @@ This site targets **WCAG 2.1 AA**.
 
 - Every `<section>` must have `aria-labelledby` pointing to its heading `id`
 - Use semantic HTML: `<nav>`, `<main>`, `<header>`, `<footer>`, `<section>`
-- All images must have descriptive `alt` text (not empty, not "image of")
+- All images must have descriptive `alt` text (not empty, not "image of"). The one exception is a purely decorative image that sits next to text saying the same thing, like the nav logo mark: it takes `alt=""` and `aria-hidden="true"` so screen readers skip it
 - Focus styles use the global rule in `Layout.astro` — do not override `:focus-visible` without maintaining visibility
 - Do not go below `0.75rem` font size
 - The skip link (`<a class="skip-link">`) in `Layout.astro` must remain as-is
+- A section with no visible heading still gets one for `aria-labelledby`: an `<h2>` with the global `.visually-hidden` class, its text from the translation files
+- Alt text and `aria-label`s are user-facing strings too, so they come from the translation files
 - Any link that opens a new tab gets `aria-label={`${label} ${t('layout.opens_new_tab')}`}` — never hardcode the phrase, it has to translate
 - Mark the current page with `aria-current="page"` wherever a page links to itself
 
