@@ -125,7 +125,7 @@ Go to https://dash.cloudflare.com and log in.
 | Builds for non-production branches | Enabled |
 | Build command | `npm run build` |
 | Deploy command | `npx wrangler deploy` |
-| Non-production branch deploy command | `npx wrangler versions upload` |
+| Version command (non-production branches) | `npx wrangler versions upload` |
 | Build output directory | `dist` |
 | Root directory | `/` |
 | Build watch paths — include | `*` |
