@@ -129,7 +129,13 @@ Go to https://dash.cloudflare.com and log in.
 | Build output directory | `dist` |
 | Root directory | `/` |
 | Build watch paths — include | `*` |
-| Build watch paths — exclude | `node_modules/**`, `.git/` (default) |
+| Build watch paths — exclude | `node_modules/**`, `.git/`, `docs/*`, `.github/*`, `.claude/*`, `.vscode/*`, `README.md`, `DEPLOYMENT.md`, `CLAUDE.md`, `STYLE_GUIDE.md` |
+
+> The exclude list keeps docs, CI and editor-only changes from redeploying the site. Root
+> Markdown files are named individually on purpose: Cloudflare's `*` also matches `/`, so a
+> pattern like `*.md` would also match events and board members in `src/content/` and stop
+> them deploying. Anything not excluded still triggers a build, so a new build input can't be
+> missed. At worst it causes an unneeded deploy.
 
 ### 4. Node version
 
