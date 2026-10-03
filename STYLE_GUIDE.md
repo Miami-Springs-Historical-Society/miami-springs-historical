@@ -28,7 +28,7 @@ All colors are defined as CSS custom properties in `src/layouts/Layout.astro`. *
 | ![](docs/swatches/color-footer-link-border.svg) | `--color-footer-link-border` | `rgba(250,246,240,0.5)` | Footer link underline |
 | ![](docs/swatches/color-footer-link-border-hover.svg) | `--color-footer-link-border-hover` | `rgba(250,246,240,0.7)` | Footer link underline hover |
 | ![](docs/swatches/color-btn-ghost-border.svg) | `--color-btn-ghost-border` | `rgba(255,255,255,0.7)` | Ghost button border |
-| ![](docs/swatches/color-btn-ghost-hover.svg) | `--color-btn-ghost-hover` | `rgba(255,255,255,0.08)` | Ghost button hover background |
+| ![](docs/swatches/color-btn-ghost-hover.svg) | `--color-btn-ghost-hover` | `rgba(255,255,255,0.15)` | Ghost button hover background |
 | ![](docs/swatches/color-facebook.svg) | `--color-facebook` | `#1877f2` | Facebook brand blue |
 | ![](docs/swatches/color-facebook-dark.svg) | `--color-facebook-dark` | `#0f5cc9` | Facebook brand blue hover |
 | ![](docs/swatches/color-overlay-gradient-start.svg) | `--color-overlay-gradient-start` | `rgba(42,26,14,0.6)` | Photo overlay gradient top |
@@ -169,7 +169,9 @@ Every interactive element needs a hover change someone can actually perceive.
 - The second cue should be an underline, applied as a `border-bottom` that is present but `transparent` at rest so nothing reflows when it appears.
 - Never signal hover with italic, bold, or a size change — they alter text metrics, so the element shifts under the cursor.
 - Solid-fill buttons follow the same rule. Their fill darkening is only `1.39:1` (brown) and `1.5:1` (green), so they also underline their label on hover: `text-decoration: underline; text-underline-offset: 0.3em`. Text decoration doesn't change text metrics, so nothing shifts.
-- Outlined buttons (ghost) and cards already change two things, background and border, so they need nothing extra.
+- Outlined (ghost) buttons also underline their label. Their background tint is `--color-btn-ghost-hover` at `0.15`, about `1.58:1` over the darker parts of a photo. The original `0.08` measured `1.25:1` and couldn't be seen. Going above `0.15` drops white label text below 4.5:1 over light parts of a photo.
+- Links follow the same pattern: a color change plus an underline or border that appears. Link-style CTAs that are always underlined (`.museum-teaser-link`, `.exhibit-link`) thicken the underline with `box-shadow: inset 0 -2px 0 var(--color-accent)`, which doesn't affect layout. Icon-only links (footer social) lift with `transform: translateY(-2px)`, which moves the icon without changing its size or pushing anything else.
+- Rule of thumb: **two things change on hover**, and at least one is an underline, border, shadow or lift, not only a color shift.
 
 ---
 

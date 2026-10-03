@@ -59,10 +59,12 @@ const t = useTranslations(Astro.currentLocale);
     text-decoration: none;
     display: inline-block;
     margin-bottom: 1.5rem;
+    border-bottom: 1px solid transparent;
   }
 
   .back-link:hover {
     color: var(--color-primary);
+    border-bottom-color: currentColor;
   }
 
   .page-title {

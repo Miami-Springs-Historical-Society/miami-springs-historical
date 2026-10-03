@@ -101,12 +101,13 @@ const isResources = Astro.url.pathname.replace(/\/$/, '').endsWith('/resources')
 
   .footer-icons a {
     color: var(--color-bg);
-    transition: color 0.2s;
+    transition: color 0.2s, transform 0.2s;
     display: flex;
   }
 
   .footer-icons a:hover {
     color: var(--color-white);
+    transform: translateY(-2px);
   }
 
   .footer-icons svg {

@@ -249,10 +249,12 @@ const t = useTranslations(Astro.currentLocale);
     text-decoration: none;
     display: inline-block;
     margin-bottom: 1.5rem;
+    border-bottom: 1px solid transparent;
   }
 
   .back-link:hover {
     color: var(--color-primary);
+    border-bottom-color: currentColor;
   }
 
   .page-title {
@@ -385,6 +387,7 @@ const t = useTranslations(Astro.currentLocale);
 
   .exhibit-link:hover {
     color: var(--color-accent);
+    box-shadow: inset 0 -2px 0 var(--color-accent);
   }
 
   .exhibit-image-wrap {

@@ -234,8 +234,8 @@ const t = useTranslations(Astro.currentLocale);
   /* Identical styles to museum.astro — shared via Layout globals where possible */
   .page-wrap { max-width: var(--max-width); margin: 0 auto; padding: 5rem 2rem 4rem; }
   .page-header { margin-bottom: 3.5rem; }
-  .back-link { font-size: 0.8125rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted); text-decoration: none; display: inline-block; margin-bottom: 1.5rem; }
-  .back-link:hover { color: var(--color-primary); }
+  .back-link { font-size: 0.8125rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted); text-decoration: none; display: inline-block; margin-bottom: 1.5rem; border-bottom: 1px solid transparent; }
+  .back-link:hover { color: var(--color-primary); border-bottom-color: currentColor; }
   .page-title { font-family: var(--font-display); font-size: clamp(1.75rem, 5vw, 2.75rem); color: var(--color-primary); margin-bottom: 0.75rem; }
   .story-section { margin-bottom: 3.5rem; }
   .story-body { font-size: 1.0625rem; color: var(--color-text); line-height: 1.8; max-width: 660px; margin: 0 auto 1.25rem; text-align: center; }
@@ -255,7 +255,7 @@ const t = useTranslations(Astro.currentLocale);
   .exhibit-text h3 { font-family: var(--font-display); font-size: 1.25rem; color: var(--color-primary); margin-bottom: 0.75rem; }
   .exhibit-text p { font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.7; margin-bottom: 1rem; }
   .exhibit-link { font-size: 0.8125rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-primary); text-decoration: none; border-bottom: 2px solid var(--color-accent); padding-bottom: 2px; }
-  .exhibit-link:hover { color: var(--color-accent); }
+  .exhibit-link:hover { color: var(--color-accent); box-shadow: inset 0 -2px 0 var(--color-accent); }
   .exhibit-image-wrap { overflow: hidden; }
   .exhibit-image { width: 100%; height: 300px; object-fit: cover; display: block; }
   .exhibit-image--portrait { height: 400px; object-fit: cover; object-position: center top; }
