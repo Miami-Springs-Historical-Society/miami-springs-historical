@@ -38,6 +38,9 @@ jobs:
               "GHSA-48c2-rrv3-qjmp",  # yaml stack-overflow — dev-only (yaml@2.7.1 pinned in
                                       # yaml-language-server via @astrojs/check); prod path
                                       # astro→vite uses patched yaml@2.9.0; static, no untrusted YAML
+              "GHSA-ch52-4w7c-c8xp",  # http-cache-semantics max-stale — all versions, no patch yet;
+                                      # astro uses it at build time only, static site has no shared
+                                      # cache. Remove once a fixed release ships.
           }
 
           data = json.load(open("audit.json"))
