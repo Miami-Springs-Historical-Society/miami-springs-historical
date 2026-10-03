@@ -1,7 +1,8 @@
 {
   "layout": {
     "skip_to_content": "Skip to main content",
-    "opens_new_tab": "(opens in new tab)"
+    "opens_new_tab": "(opens in new tab)",
+    "next_steps": "Next steps"
   },
   "nav": {
     "about": "About",
@@ -76,7 +77,7 @@
     "attribution": "Hero photo: Wikimedia Commons, CC BY 2.0. Historical photo: Fishbaugh, W.A., State Archives of Florida. Public Domain.",
     "link_city": "City of Miami Springs",
     "link_resources": "Resources & References",
-    "aria_facebook": "Follow us on Facebook (opens in new tab)",
+    "aria_facebook": "Follow us on Facebook",
     "aria_email": "Email us",
     "aria_rss": "RSS Feed"
   },
@@ -98,17 +99,23 @@
     "exhibits_heading": "Exhibits",
     "exhibit_1_title": "City of Miami Springs",
     "exhibit_1_body": "Traces the evolution of Miami Springs from Glenn Curtiss and James Bright's 1920s vision through a century of community growth — with photographs, maps, and detailed historical information.",
+    "exhibit_1_alt": "Historical exhibit on the City of Miami Springs",
     "exhibit_2_title": "Aviation & Airline History",
     "exhibit_2_body": "A rich collection of airline memorabilia, uniforms, and artifacts from the airlines that have served Miami — including Eastern Air Lines, Pan American Airways, and beyond. Stewardess uniforms spanning decades bring the golden age of aviation to life.",
+    "exhibit_2_alt": "Stewardess uniforms and airline memorabilia exhibit",
     "exhibit_3_title": "Glenn Curtiss Flight Schools",
     "exhibit_3_body": "Glenn Curtiss's flight schools trained some of aviation's most significant pioneers — including the first Japanese, Indian, Cuban, and Puerto Rican aviators. Among them: <strong>Agustín Parlá</strong>, the \"Father of Cuban Aviation,\" who trained at Curtiss's Miami school in 1912. This exhibit tells the story of how Curtiss opened aviation to the world.",
+    "exhibit_3_alt": "Glenn Curtiss flight school students, 1912",
     "exhibit_4_title": "Pan American Airways — Dinner Key Diorama",
     "exhibit_4_body": "A new exhibit featuring a detailed diorama of the historic Pan American Airways Flying Clipper Seaplane Terminal at Dinner Key, circa 1934 — one of the most evocative landmarks of Miami's aviation golden age.",
+    "exhibit_4_alt": "Pan American Airways Dinner Key diorama exhibit",
     "exhibit_5_title": "Miami Battle Creek Sanitarium — Immersive Video",
     "exhibit_5_body": "An immersive video room exploring the Hotel Country Club — built by Glenn Curtiss in 1926 — and its transformation into the Miami Battle Creek Sanitarium under Dr. John Harvey Kellogg — sold in 1929, opening as a sanitarium in 1931. The building at 201 Curtiss Parkway, a Miami Springs Historic Site since 1984, later became a nursing home and continues in that role today.",
+    "exhibit_5_alt": "Kellogg Southern Sanitarium, Miami Springs, 1928",
     "exhibit_5_link": "City historic site record →",
     "exhibit_6_title": "The Flamingo Flamboyance",
     "exhibit_6_body": "A beloved exhibit on the surprising 2022 visits of a flock of flamingos from the Hialeah Race Track to Miami Springs — an unexpected natural spectacle that captured the community's imagination.",
+    "exhibit_6_alt": "Flamingo flamboyance exhibit",
     "gift_heading": "Gift Shop",
     "gift_body": "Browse our gift shop for unique historical gifts and keepsakes — all proceeds support the museum. The Miami Springs Historical Society is a 501(c)(3) nonprofit, so your purchases and donations are tax-deductible.",
     "donate_heading": "Donate Artifacts",
@@ -159,7 +166,9 @@
     "museum_cta": "Explore the Museum →",
     "facebook_cta": "Follow Us on Facebook →",
     "home_cta": "Return to the Society →",
-    "photo_credit": "Glenn H. Curtiss Memorial Circle — Wikimedia Commons, CC BY-SA 4.0"
+    "photo_credit": "Glenn H. Curtiss Memorial Circle — Wikimedia Commons, CC BY-SA 4.0",
+    "banner_label": "Glenn H. Curtiss Memorial Circle, Miami Springs",
+    "banner_alt": "Glenn H. Curtiss Memorial Circle, the heart of Miami Springs"
   },
   "not_found": {
     "meta_title": "Page Not Found — Miami Springs Historical Society",
@@ -168,7 +177,8 @@
     "heading": "This page was never developed.",
     "body": "During the 1920s Florida land boom, thousands of lots in Country Club Estates were sold to eager buyers — many of which were never built on. This page appears to be one of them.",
     "cta": "Return to the Society",
-    "photo_credit": "\"Cars entering Country Club Estates, Miami Springs,\" Feb. 24, 1926. Fishbaugh, W. A."
+    "photo_credit": "\"Cars entering Country Club Estates, Miami Springs,\" Feb. 24, 1926. Fishbaugh, W. A.",
+    "banner_alt": "Cars entering Country Club Estates, Miami Springs, February 1926"
   },
   "membership": {
     "meta_title": "Welcome — Miami Springs Historical Society",
@@ -179,6 +189,7 @@
     "museum_cta": "Explore the Museum",
     "facebook_cta": "Follow Us on Facebook",
     "home_cta": "Return to the Society",
-    "photo_credit": "Photo courtesy of Miami Springs Councilman Jorge Santin and the Glenn H. Curtiss Museum in Hammondsport, NY"
+    "photo_credit": "Photo courtesy of Miami Springs Councilman Jorge Santin and the Glenn H. Curtiss Museum in Hammondsport, NY",
+    "banner_alt": "A vintage automobile and motor coach parked before a Pueblo Revival building among palm trees in early Miami Springs"
   }
 }

@@ -20,7 +20,7 @@ const t = useTranslations(Astro.currentLocale);
     <div class="image-wrap">
       <Image
         src={bgImage}
-        alt="A vintage automobile and motor coach parked before a Pueblo Revival building among palm trees in early Miami Springs"
+        alt={t('membership.banner_alt')}
         class="bg-image"
         widths={[640, 960, 1280, 1920]}
         sizes="100vw"
@@ -38,7 +38,7 @@ const t = useTranslations(Astro.currentLocale);
       <div class="divider"></div>
       <p class="body">{t('membership.body')}</p>
 
-      <nav class="actions" aria-label="Next steps">
+      <nav class="actions" aria-label={t('layout.next_steps')}>
         <a href="/museum" class="btn-ghost">{t('membership.museum_cta')}</a>
         <a href={generalSettings.facebook_url} target="_blank" rel="noopener noreferrer" class="btn-ghost" aria-label={`${t('membership.facebook_cta')} ${t('layout.opens_new_tab')}`}>{t('membership.facebook_cta')}</a>
         <a href="/" class="btn-ghost">{t('membership.home_cta')}</a>
@@ -99,7 +99,7 @@ const t = useTranslations(Astro.currentLocale);
     text-transform: uppercase;
     color: var(--color-eyebrow);
     margin-bottom: 1rem;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+    text-shadow: 0 1px 6px var(--color-shadow-text);
   }
 
   h1 {
@@ -109,7 +109,7 @@ const t = useTranslations(Astro.currentLocale);
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 1.25rem;
-    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 2px 16px var(--color-shadow-heading);
   }
 
   .divider {
@@ -128,7 +128,7 @@ const t = useTranslations(Astro.currentLocale);
     max-width: 580px;
     margin-left: auto;
     margin-right: auto;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 1px 6px var(--color-shadow-text);
   }
 
   .actions {
@@ -148,6 +148,7 @@ const t = useTranslations(Astro.currentLocale);
     font-size: 0.8125rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    white-space: nowrap;
     border: 2px solid var(--color-btn-ghost-border);
     transition: background-color 0.2s, border-color 0.2s;
   }
@@ -155,6 +156,8 @@ const t = useTranslations(Astro.currentLocale);
   .btn-ghost:hover {
     background-color: var(--color-btn-ghost-hover);
     border-color: var(--color-white);
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
   }
 
   .photo-credit {
@@ -168,13 +171,21 @@ const t = useTranslations(Astro.currentLocale);
     font-size: 0.75rem;
     font-style: italic;
     color: var(--color-photo-credit);
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    text-shadow: 0 1px 4px var(--color-shadow-text);
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 640px) {
     .actions {
       flex-direction: column;
-      align-items: stretch;
+      align-items: center;
+    }
+
+    .btn-ghost {
+      width: 100%;
+      max-width: 22rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      text-align: center;
     }
   }
 </style>

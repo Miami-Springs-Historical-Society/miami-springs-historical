@@ -20,10 +20,10 @@ const t = useTranslations(Astro.currentLocale);
   <div class="page-wrap">
 
     <!-- Banner -->
-    <div class="banner" role="img" aria-label="Círculo Memorial Glenn H. Curtiss, Miami Springs">
+    <div class="banner" role="img" aria-label={t('thank_you.banner_label')}>
       <Image
         src={bannerImage}
-        alt="Círculo Memorial Glenn H. Curtiss, el corazón de Miami Springs"
+        alt={t('thank_you.banner_alt')}
         class="banner-img"
         widths={[640, 960, 1400]}
         sizes="100vw"
@@ -73,7 +73,8 @@ const t = useTranslations(Astro.currentLocale);
       </section>
 
       <!-- Action links -->
-      <section class="next-section" aria-label="Próximos pasos">
+      <section class="next-section" aria-labelledby="next-heading">
+        <h2 id="next-heading" class="visually-hidden">{t('layout.next_steps')}</h2>
         <div class="next-links">
           <a href="/es/museum" class="next-card">
             <span class="next-label">{t('thank_you.museum_cta')}</span>
@@ -100,9 +101,9 @@ const t = useTranslations(Astro.currentLocale);
   .banner-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--color-banner-overlay-start) 0%, var(--color-banner-overlay-mid) 70%, var(--color-overlay-gradient-end) 100%); }
   .banner-content { position: relative; z-index: 1; padding: 0 2rem 2.5rem; max-width: var(--max-width); margin: 0 auto; width: 100%; }
   .banner-eyebrow { font-family: var(--font-body); font-size: clamp(0.75rem,1.5vw,0.8125rem); letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-eyebrow); margin-bottom: 0.75rem; }
-  .banner-heading { font-family: var(--font-display); font-size: clamp(2rem,5vw,3.5rem); color: var(--color-white); font-weight: 700; line-height: 1.1; margin-bottom: 0.875rem; text-shadow: 0 2px 12px rgba(0,0,0,0.5); }
+  .banner-heading { font-family: var(--font-display); font-size: clamp(2rem,5vw,3.5rem); color: var(--color-white); font-weight: 700; line-height: 1.1; margin-bottom: 0.875rem; text-shadow: 0 2px 12px var(--color-shadow-heading); }
   .banner-sub { font-family: var(--font-display); font-style: italic; font-size: clamp(0.9375rem,2vw,1.1875rem); color: var(--color-white); max-width: 640px; opacity: 0.92; }
-  .photo-credit { position: absolute; bottom: 0.5rem; right: 1rem; font-size: 0.75rem; font-style: italic; color: var(--color-photo-credit); z-index: 2; }
+  .photo-credit { position: absolute; bottom: 0.5rem; right: 1rem; font-size: 0.75rem; font-style: italic; color: var(--color-photo-credit); text-shadow: 0 1px 4px var(--color-shadow-text); z-index: 2; }
   .page-main { max-width: 780px; margin: 0 auto; padding: 4rem 2rem 3rem; flex: 1; }
   .section-heading { font-family: var(--font-display); font-size: clamp(1.25rem,3vw,1.625rem); color: var(--color-primary); margin-bottom: 1rem; text-align: center; }
   .divider { width: 60px; height: 3px; background-color: var(--color-accent); margin: 0 auto 2rem; }

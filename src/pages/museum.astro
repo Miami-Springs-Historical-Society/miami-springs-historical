@@ -77,7 +77,7 @@ const t = useTranslations(Astro.currentLocale);
           <div class="exhibit-image-wrap">
             <Image
               src={museumHomestead}
-              alt="Historical exhibit on the City of Miami Springs"
+              alt={t('museum.exhibit_1_alt')}
               class="exhibit-image"
               widths={exhibitWidths(museumHomestead)}
               sizes="(max-width: 768px) 100vw, (max-width: 1100px) 46vw, 494px"
@@ -95,7 +95,7 @@ const t = useTranslations(Astro.currentLocale);
           <div class="exhibit-image-wrap">
             <Image
               src={museumEastern}
-              alt="Stewardess uniforms and airline memorabilia exhibit"
+              alt={t('museum.exhibit_2_alt')}
               class="exhibit-image exhibit-image--portrait"
               widths={exhibitWidths(museumEastern)}
               sizes="(max-width: 768px) 100vw, (max-width: 1100px) 46vw, 494px"
@@ -113,7 +113,7 @@ const t = useTranslations(Astro.currentLocale);
           <div class="exhibit-image-wrap">
             <Image
               src={curtissSchool1912}
-              alt="Glenn Curtiss flight school students, 1912"
+              alt={t('museum.exhibit_3_alt')}
               class="exhibit-image exhibit-image--portrait exhibit-image--offset"
               widths={exhibitWidths(curtissSchool1912)}
               sizes="(max-width: 768px) 100vw, (max-width: 1100px) 46vw, 494px"
@@ -131,7 +131,7 @@ const t = useTranslations(Astro.currentLocale);
           <div class="exhibit-image-wrap">
             <Image
               src={museumPanam}
-              alt="Pan American Airways Dinner Key diorama exhibit"
+              alt={t('museum.exhibit_4_alt')}
               class="exhibit-image exhibit-image--portrait"
               widths={exhibitWidths(museumPanam)}
               sizes="(max-width: 768px) 100vw, (max-width: 1100px) 46vw, 494px"
@@ -145,12 +145,12 @@ const t = useTranslations(Astro.currentLocale);
           <div class="exhibit-text">
             <h3>{t('museum.exhibit_5_title')}</h3>
             <p>{t('museum.exhibit_5_body')}</p>
-            <a href="https://www.miamisprings-fl.gov/community/page/hotel-country-club-fairhavens" target="_blank" rel="noopener noreferrer" class="exhibit-link">{t('museum.exhibit_5_link')}</a>
+            <a href="https://www.miamisprings-fl.gov/community/page/hotel-country-club-fairhavens" target="_blank" rel="noopener noreferrer" class="exhibit-link" aria-label={`${t('museum.exhibit_5_link').replace(/\s*→$/, '')} ${t('layout.opens_new_tab')}`}>{t('museum.exhibit_5_link')}</a>
           </div>
           <div class="exhibit-image-wrap">
             <Image
               src={kelloggSanitarium1928}
-              alt="Kellogg Southern Sanitarium, Miami Springs, 1928"
+              alt={t('museum.exhibit_5_alt')}
               class="exhibit-image"
               widths={exhibitWidths(kelloggSanitarium1928)}
               sizes="(max-width: 768px) 100vw, (max-width: 1100px) 46vw, 494px"
@@ -169,7 +169,7 @@ const t = useTranslations(Astro.currentLocale);
           <div class="exhibit-image-wrap">
             <Image
               src={museumFlamingos}
-              alt="Flamingo flamboyance exhibit"
+              alt={t('museum.exhibit_6_alt')}
               class="exhibit-image exhibit-image--portrait"
               widths={exhibitWidths(museumFlamingos)}
               sizes="(max-width: 768px) 100vw, (max-width: 1100px) 46vw, 494px"
@@ -249,10 +249,12 @@ const t = useTranslations(Astro.currentLocale);
     text-decoration: none;
     display: inline-block;
     margin-bottom: 1.5rem;
+    border-bottom: 1px solid transparent;
   }
 
   .back-link:hover {
     color: var(--color-primary);
+    border-bottom-color: currentColor;
   }
 
   .page-title {
@@ -385,6 +387,7 @@ const t = useTranslations(Astro.currentLocale);
 
   .exhibit-link:hover {
     color: var(--color-accent);
+    box-shadow: inset 0 -2px 0 var(--color-accent);
   }
 
   .exhibit-image-wrap {
@@ -446,19 +449,38 @@ const t = useTranslations(Astro.currentLocale);
   .donate-cta {
     display: inline-block;
     margin-top: 1.25rem;
-    padding: 0.625rem 1.5rem;
+    padding: 0.75rem 2rem;
     background-color: var(--color-accent);
     color: var(--color-white);
     font-family: var(--font-body);
-    font-size: 0.875rem;
-    letter-spacing: 0.08em;
+    font-size: 0.8125rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
     text-decoration: none;
-    transition: background-color 0.2s;
+    border: 2px solid var(--color-accent);
+    transition: background-color 0.2s, border-color 0.2s;
   }
 
   .donate-cta:hover {
     background-color: var(--color-accent-dark);
+    border-color: var(--color-accent-dark);
     color: var(--color-white);
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+  }
+
+  @media (max-width: 640px) {
+    .donate-cta {
+      display: block;
+      width: 100%;
+      max-width: 22rem;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      text-align: center;
+    }
   }
 
   /* ── Satellite locations ──────────────────────────────── */

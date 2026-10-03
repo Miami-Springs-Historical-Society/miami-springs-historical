@@ -19,10 +19,10 @@ const t = useTranslations(Astro.currentLocale);
   <div class="page-wrap">
 
     <!-- Banner -->
-    <div class="banner" role="img" aria-label="Glenn H. Curtiss Memorial Circle, Miami Springs">
+    <div class="banner" role="img" aria-label={t('thank_you.banner_label')}>
       <Image
         src={bannerImage}
-        alt="Glenn H. Curtiss Memorial Circle, the heart of Miami Springs"
+        alt={t('thank_you.banner_alt')}
         class="banner-img"
         widths={[640, 960, 1400]}
         sizes="100vw"
@@ -72,7 +72,8 @@ const t = useTranslations(Astro.currentLocale);
       </section>
 
       <!-- Action links -->
-      <section class="next-section" aria-label="Next steps">
+      <section class="next-section" aria-labelledby="next-heading">
+        <h2 id="next-heading" class="visually-hidden">{t('layout.next_steps')}</h2>
         <div class="next-links">
           <a href="/museum" class="next-card">
             <span class="next-label">{t('thank_you.museum_cta')}</span>
@@ -154,7 +155,7 @@ const t = useTranslations(Astro.currentLocale);
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 0.875rem;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 12px var(--color-shadow-heading);
   }
 
   .banner-sub {
@@ -173,6 +174,7 @@ const t = useTranslations(Astro.currentLocale);
     font-size: 0.75rem;
     font-style: italic;
     color: var(--color-photo-credit);
+    text-shadow: 0 1px 4px var(--color-shadow-text);
     z-index: 2;
   }
 

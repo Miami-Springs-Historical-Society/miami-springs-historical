@@ -103,6 +103,7 @@ const base = isEs ? '/es' : '';
     text-decoration: none;
     letter-spacing: 0.15em;
     font-weight: 600;
+    border-bottom: 1px solid transparent;
   }
 
   .nav-logo-mark {
@@ -113,6 +114,7 @@ const base = isEs ? '/es' : '';
 
   .nav-logo:hover {
     color: var(--color-white);
+    border-bottom-color: currentColor;
   }
 
   .nav-links {
@@ -171,6 +173,8 @@ const base = isEs ? '/es' : '';
   .nav-join a:hover {
     background-color: var(--color-primary-dark) !important;
     color: var(--color-white) !important;
+    text-decoration: underline !important;
+    text-underline-offset: 0.3em !important;
   }
 
   .nav-donate a {
@@ -180,6 +184,8 @@ const base = isEs ? '/es' : '';
   .nav-donate a:hover {
     background-color: var(--color-accent-dark) !important;
     color: var(--color-white) !important;
+    text-decoration: underline !important;
+    text-underline-offset: 0.3em !important;
   }
 
   .nav-lang a {

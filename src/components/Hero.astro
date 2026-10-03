@@ -77,9 +77,9 @@ const t = useTranslations(Astro.currentLocale);
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(42, 26, 14, 0.55) 0%,
-      rgba(42, 26, 14, 0.68) 60%,
-      rgba(42, 26, 14, 0.78) 100%
+      var(--color-hero-overlay-start) 0%,
+      var(--color-hero-overlay-mid) 60%,
+      var(--color-hero-overlay-end) 100%
     );
   }
 
@@ -98,7 +98,7 @@ const t = useTranslations(Astro.currentLocale);
     text-transform: uppercase;
     color: var(--color-eyebrow);
     margin-bottom: 1.25rem;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 1px 8px var(--color-shadow-text-strong);
   }
 
   .hero-title {
@@ -108,7 +108,7 @@ const t = useTranslations(Astro.currentLocale);
     font-weight: 700;
     line-height: 1.08;
     margin-bottom: 1.375rem;
-    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 2px 16px var(--color-shadow-heading);
   }
 
   .hero-tagline {
@@ -117,7 +117,7 @@ const t = useTranslations(Astro.currentLocale);
     font-size: clamp(1.0625rem, 2.5vw, 1.375rem);
     color: var(--color-white);
     margin-bottom: 2.75rem;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 1px 8px var(--color-shadow-text-strong);
   }
 
   .hero-cta {
@@ -146,6 +146,8 @@ const t = useTranslations(Astro.currentLocale);
     background-color: var(--color-primary-dark);
     border-color: var(--color-primary-dark);
     color: var(--color-white);
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
   }
 
   .btn-secondary {
@@ -167,6 +169,8 @@ const t = useTranslations(Astro.currentLocale);
     border-color: var(--color-white);
     background-color: var(--color-btn-ghost-hover);
     color: var(--color-white);
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
   }
   .btn-donate {
     display: inline-block;
@@ -187,6 +191,8 @@ const t = useTranslations(Astro.currentLocale);
     background-color: var(--color-accent-dark);
     border-color: var(--color-accent-dark);
     color: var(--color-white);
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
   }
 
   @media (max-width: 640px) {
