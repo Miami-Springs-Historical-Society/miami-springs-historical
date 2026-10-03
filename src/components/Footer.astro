@@ -127,13 +127,14 @@ const isResources = Astro.url.pathname.replace(/\/$/, '').endsWith('/resources')
     text-transform: uppercase;
     white-space: nowrap;
     text-decoration: none;
-    border: 2px solid var(--color-accent);
-    transition: background-color 0.2s, border-color 0.2s;
+    /* WCAG 1.4.11: green sits at 2.2:1 against the footer (1.5:1 on hover),
+       so the tan border carries the 3:1 boundary, same as the nav pills. */
+    border: 1px solid var(--color-secondary);
+    transition: background-color 0.2s;
   }
 
   .footer-donate:hover {
     background-color: var(--color-accent-dark);
-    border-color: var(--color-accent-dark);
     color: var(--color-white);
     text-decoration: underline;
     text-underline-offset: 0.3em;

@@ -146,6 +146,7 @@ Shared by every variant: `--font-body`, `0.8125rem`, uppercase, `letter-spacing:
 - Text: `--color-white`
 - Border: `2px solid --color-accent`
 - Padding: `0.75rem 2rem` in the hero and on the museum page, `0.5rem 1.5rem` in the footer
+- On a dark bar (the footer), use `1px solid --color-secondary` for the border instead, like the nav pills: green is only 2.2:1 against the footer
 - Use exclusively for donation/financial support CTAs to visually distinguish them from navigation actions. Do not use for general page navigation.
 
 **Nav pills (JOIN / DONATE in the menu):**
